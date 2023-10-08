@@ -9,6 +9,9 @@ import exit_operations as exit_ops
 import export_operations as export_ops
 import delete_operations as delete_ops
 
+import customer
+
+
 
 count = 0
 text = ''
@@ -64,71 +67,61 @@ text = ''
 
 #################################################################################################
 
-def open_customer_window():
-    # I want to diaplay below query results in new window that open in this function
-    # query='SELECT * FROM customers'
-    # mycursor.execute(query)
-    # fetched_data=mycursor.fetchall()
-    # student_table.delete(*student_table.get_children())
-    # for data in fetched_data:
-    #     data_list=list(data)
-    #     student_table.insert('',END,values=data_list)
+# def open_customer_window():
+#     customer_window = Toplevel(root)
+#     customer_window.title('Customer Data')
+#     customer_window.geometry('800x550')
 
-    
-    customer_window = Toplevel(root)
-    customer_window.title('Customer Data')
-    customer_window.geometry('800x550')
+#     customer_frame = Frame(customer_window, bg='white', relief=RIDGE)
+#     customer_frame.pack(fill=BOTH, expand=1)
 
-    customer_frame = Frame(customer_window, bg='white', relief=RIDGE)
-    customer_frame.pack(fill=BOTH, expand=1)
+#     customer_scroll_x = Scrollbar(customer_frame, orient=HORIZONTAL)
+#     customer_scroll_y = Scrollbar(customer_frame, orient=VERTICAL)
 
-    customer_scroll_x = Scrollbar(customer_frame, orient=HORIZONTAL)
-    customer_scroll_y = Scrollbar(customer_frame, orient=VERTICAL)
+#     customer_table = ttk.Treeview(customer_frame, columns=(
+#         'CustomerID', 'FirstName', 'LastName', 'Email', 'Phone', 'Address',
+#         'RegistrationDate', 'LoyaltyPoints'),
+#         xscrollcommand=customer_scroll_x.set,
+#         yscrollcommand=customer_scroll_y.set)
 
-    customer_table = ttk.Treeview(customer_frame, columns=(
-        'CustomerID', 'FirstName', 'LastName', 'Email', 'Phone', 'Address',
-        'RegistrationDate', 'LoyaltyPoints'),
-        xscrollcommand=customer_scroll_x.set,
-        yscrollcommand=customer_scroll_y.set)
+#     customer_scroll_x.config(command=customer_table.xview)
+#     customer_scroll_y.config(command=customer_table.yview)
 
-    customer_scroll_x.config(command=customer_table.xview)
-    customer_scroll_y.config(command=customer_table.yview)
+#     customer_scroll_x.pack(side=BOTTOM, fill=X)
+#     customer_scroll_y.pack(side=RIGHT, fill=Y)
 
-    customer_scroll_x.pack(side=BOTTOM, fill=X)
-    customer_scroll_y.pack(side=RIGHT, fill=Y)
+#     customer_table.pack(fill=BOTH, expand=1)
 
-    customer_table.pack(fill=BOTH, expand=1)
+#     customer_table.heading('CustomerID', text='CustomerID')
+#     customer_table.heading('FirstName', text='FirstName')
+#     customer_table.heading('LastName', text='LastName')
+#     customer_table.heading('Email', text='Email')
+#     customer_table.heading('Phone', text='Phone')
+#     customer_table.heading('Address', text='Address')
+#     customer_table.heading('RegistrationDate', text='RegistrationDate')
+#     customer_table.heading('LoyaltyPoints', text='LoyaltyPoints')
 
-    customer_table.heading('CustomerID', text='CustomerID')
-    customer_table.heading('FirstName', text='FirstName')
-    customer_table.heading('LastName', text='LastName')
-    customer_table.heading('Email', text='Email')
-    customer_table.heading('Phone', text='Phone')
-    customer_table.heading('Address', text='Address')
-    customer_table.heading('RegistrationDate', text='RegistrationDate')
-    customer_table.heading('LoyaltyPoints', text='LoyaltyPoints')
+#     customer_table.column('CustomerID', width=20, anchor=CENTER)
+#     customer_table.column('FirstName', width=60, anchor=CENTER)
+#     customer_table.column('LastName', width=60, anchor=CENTER)
+#     customer_table.column('Email', width=60, anchor=CENTER)
+#     customer_table.column('Phone', width=60, anchor=CENTER)
+#     customer_table.column('Address', width=60, anchor=CENTER)
+#     customer_table.column('RegistrationDate', width=60, anchor=CENTER)
+#     customer_table.column('LoyaltyPoints', width=60, anchor=CENTER)
 
-    customer_table.column('CustomerID', width=20, anchor=CENTER)
-    customer_table.column('FirstName', width=60, anchor=CENTER)
-    customer_table.column('LastName', width=60, anchor=CENTER)
-    customer_table.column('Email', width=60, anchor=CENTER)
-    customer_table.column('Phone', width=60, anchor=CENTER)
-    customer_table.column('Address', width=60, anchor=CENTER)
-    customer_table.column('RegistrationDate', width=60, anchor=CENTER)
-    customer_table.column('LoyaltyPoints', width=60, anchor=CENTER)
+#     style = ttk.Style()
+#     style.configure('Treeview', rowheight=40, font=('Helvetica', 10), foreground='black', background='white', fieldbackground='white')
+#     style.configure('Treeview.Heading', font=('Helvetica', 12, 'bold'), foreground='black', background='light green', fieldbackground='grey')
+#     customer_table.config(show='headings')
 
-    style = ttk.Style()
-    style.configure('Treeview', rowheight=40, font=('Helvetica', 10), foreground='black', background='white', fieldbackground='white')
-    style.configure('Treeview.Heading', font=('Helvetica', 12, 'bold'), foreground='black', background='light green', fieldbackground='grey')
-    customer_table.config(show='headings')
+#     query='SELECT * FROM customers'
+#     mycursor.execute(query)
+#     fetched_data=mycursor.fetchall()
 
-    query='SELECT * FROM customers'
-    mycursor.execute(query)
-    fetched_data=mycursor.fetchall()
-
-    for data in fetched_data:
-        data_list=list(data)
-        customer_table.insert('',END,values=data_list)
+#     for data in fetched_data:
+#         data_list=list(data)
+#         customer_table.insert('',END,values=data_list)
 
 #################################################################################################
 
@@ -513,7 +506,7 @@ root.set_theme('radiance')
 
 root.geometry('1174x680+0+0')
 root.resizable(True, True)
-root.title('Student Management System')
+root.title('DBMS For Supermarket')
 
 # datetimeLabel = Label(root, text='Hello', font=('Helvetica', 20, 'bold'))
 # datetimeLabel.place(x=5, y=5)
@@ -524,7 +517,7 @@ root.title('Student Management System')
 # sliderLabel.place(x=200, y=0)
 # slider() # Start the animation
 
-s = 'Student Management System'
+s = 'DBMS For Supermarket'
 sliderLabel = Label(root, text=s, font=('Helvetica', 30, 'bold'), width=30, fg='black', anchor='w')
 sliderLabel.place(x=5, y=5)
 
@@ -561,8 +554,9 @@ exportDataButton.grid(row=6, column=0, padx=10, pady=0)
 exitButton = ttk.Button(leftFrame, text='Exit', width=25, command=lambda: exit_ops.handle_exit(root))
 exitButton.grid(row=7, column=0, padx=10, pady=0)
 
-show_treeview_button = ttk.Button(leftFrame, text='Show Customers', width=25, state=DISABLED, command=open_customer_window)
+show_treeview_button = ttk.Button(leftFrame, text='Show Customers', width=25, state=DISABLED, command=lambda: customer.open_customer_window(root, mycursor))
 show_treeview_button.grid(row=8, column=0, padx=10, pady=0)
+
 
 
 #####################################################
