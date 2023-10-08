@@ -1,3 +1,1 @@
-# ADBMS_CourseWork
-
-OK
+# DBMS-MiniProjectss
