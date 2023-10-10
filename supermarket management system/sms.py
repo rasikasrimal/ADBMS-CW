@@ -305,7 +305,7 @@ def show_promotions():
         promotions.insert('',END,values=data_list)
 
 def show_promotionusage():
-    query='SELECT * FROM promotionusage'
+    query= 'select * from promotionusage'
     mycursor.execute(query)
     fetched_data=mycursor.fetchall()
     promotionusage_table.delete(*promotionusage_table.get_children())
@@ -710,7 +710,7 @@ show_promotion_button = ttk.Button(leftFrame, text='Promotion', width=25, state=
 show_promotion_button.grid(row=6, column=1, padx=10, pady=0)
 
 show_promotionusage_button = ttk.Button(leftFrame, text='Promotion Usage', width=25, state=DISABLED, command=lambda: promotionusage.open_promotionusage_window(root, mycursor))
-show_promotionusage_button.grid(row=7, column=2, padx=10, pady=0)
+show_promotionusage_button.grid(row=7, column=1, padx=10, pady=0)
 
 show_inventory_button = ttk.Button(leftFrame, text='Show Inventory', width=25, state=DISABLED, command=lambda: inventory.open_inventory_window(root, mycursor))
 show_inventory_button.grid(row=8, column=2, padx=10, pady=0)
