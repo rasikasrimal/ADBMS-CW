@@ -14,7 +14,7 @@ def open_sale_window(root, mycursor):
     sale_scroll_y = Scrollbar(sale_frame, orient=VERTICAL)
 
     sale_table = ttk.Treeview(sale_frame, columns=(
-        'saleID', 'CustomerID', 'saleDate', 'TotalAmount', 'PaymentMethod', 'PaymentDate'
+        'SaleID', 'EmployeeID',  'SaleDate','TotalSalesAmount'
     ),
         xscrollcommand=sale_scroll_x.set,
         yscrollcommand=sale_scroll_y.set)
@@ -27,19 +27,16 @@ def open_sale_window(root, mycursor):
 
     sale_table.pack(fill=BOTH, expand=1)
 
+
     sale_table.heading('saleID', text='saleID')
-    sale_table.heading('CustomerID', text='CustomerID')
+    sale_table.heading('EmployeeID', text='CustomerID')
     sale_table.heading('saleDate', text='saleDate')
     sale_table.heading('TotalAmount', text='TotalAmount')
-    sale_table.heading('PaymentMethod', text='PaymentMethod')
-    sale_table.heading('PaymentDate', text='PaymentDate')
 
     sale_table.column('saleID', width=20, anchor=CENTER)
-    sale_table.column('CustomerID', width=60, anchor=CENTER)
+    sale_table.column('EmployeeID', width=60, anchor=CENTER)
     sale_table.column('saleDate', width=60, anchor=CENTER)
     sale_table.column('TotalAmount', width=60, anchor=CENTER)
-    sale_table.column('PaymentMethod', width=60, anchor=CENTER)
-    sale_table.column('PaymentDate', width=60, anchor=CENTER)
 
     style = ttk.Style()
     style.configure('Treeview', rowheight=40, font=('Helvetica', 10), foreground='black', background='white', fieldbackground='white')
