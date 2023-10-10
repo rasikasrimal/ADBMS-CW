@@ -659,7 +659,7 @@ connectButton.place(x=980, y=0)
 
 #####################################################
 leftFrame = Frame(root, relief=RIDGE, border=2)
-leftFrame.place(x=10, y=70, width=300, height=534)
+leftFrame.place(x=10, y=70, width=800, height=534)
 ######################################################
 
 logo_image = PhotoImage(file='images/student2.png')
@@ -687,42 +687,42 @@ exportDataButton.grid(row=6, column=0, padx=10, pady=0)
 exitButton = ttk.Button(leftFrame, text='Exit', width=25, command=lambda: exit_ops.handle_exit(root))
 exitButton.grid(row=7, column=0, padx=10, pady=0)
 
+#################################################################################################
 show_customer_button = ttk.Button(leftFrame, text='Show Customers', width=25, state=DISABLED, command=lambda: customer.open_customer_window(root, mycursor))
-show_customer_button.grid(row=8, column=0, padx=10, pady=0)
+show_customer_button.grid(row=0, column=1, padx=10, pady=0)
 
 show_product_button = ttk.Button(leftFrame, text='Show Products', width=25, state=DISABLED, command=lambda: product.open_product_window(root, mycursor))
-show_product_button.grid(row=9, column=0, padx=10, pady=0)
+show_product_button.grid(row=1, column=1, padx=10, pady=0)
 
 show_order_button = ttk.Button(leftFrame, text='Show Order', width=25, state=DISABLED, command=lambda: order.open_order_window(root, mycursor))
-show_order_button.grid(row=10, column=0, padx=10, pady=0)
+show_order_button.grid(row=2, column=1, padx=10, pady=0)
 
-#################################################################################################
 show_employee_button = ttk.Button(leftFrame, text='Show Employee', width=25, state=DISABLED, command=lambda: employee.open_employee_window(root, mycursor))
-show_employee_button.grid(row=11, column=0, padx=10, pady=0)
+show_employee_button.grid(row=3, column=1, padx=10, pady=0)
 
 show_orderdetail_button = ttk.Button(leftFrame, text='Order Detail', width=25, state=DISABLED, command=lambda: orderdetail.open_orderdetail_window(root, mycursor))
-show_orderdetail_button.grid(row=12, column=0, padx=10, pady=0)
+show_orderdetail_button.grid(row=4, column=1, padx=10, pady=0)
 
 show_sale_button = ttk.Button(leftFrame, text='Sales', width=25, state=DISABLED, command=lambda: sale.open_sale_window(root, mycursor))
-show_sale_button.grid(row=13, column=0, padx=10, pady=0)
+show_sale_button.grid(row=5, column=1, padx=10, pady=0)
 
 show_promotion_button = ttk.Button(leftFrame, text='Promotion', width=25, state=DISABLED, command=lambda: promotion.open_promotion_window(root, mycursor))
-show_promotion_button.grid(row=14, column=0, padx=10, pady=0)
+show_promotion_button.grid(row=6, column=1, padx=10, pady=0)
 
 show_promotionusage_button = ttk.Button(leftFrame, text='Promotion Usage', width=25, state=DISABLED, command=lambda: promotionusage.open_promotionusage_window(root, mycursor))
-show_promotionusage_button.grid(row=15, column=0, padx=10, pady=0)
+show_promotionusage_button.grid(row=7, column=2, padx=10, pady=0)
 
 show_inventory_button = ttk.Button(leftFrame, text='Show Inventory', width=25, state=DISABLED, command=lambda: inventory.open_inventory_window(root, mycursor))
-show_inventory_button.grid(row=16, column=0, padx=10, pady=0)
+show_inventory_button.grid(row=8, column=2, padx=10, pady=0)
 
 show_supplier_button = ttk.Button(leftFrame, text='Show supplier', width=25, state=DISABLED, command=lambda: supplier.open_supplier_window(root, mycursor))
-show_supplier_button.grid(row=17, column=0, padx=10, pady=0)
+show_supplier_button.grid(row=9, column=2, padx=10, pady=0)
 
 show_transaction_button = ttk.Button(leftFrame, text='Show transaction', width=25, state=DISABLED, command=lambda: transaction.open_transaction_window(root, mycursor))
-show_transaction_button.grid(row=18, column=0, padx=10, pady=0)
+show_transaction_button.grid(row=10, column=2, padx=10, pady=0)
 
 show_storelocation_button = ttk.Button(leftFrame, text='Show storelocation', width=25, state=DISABLED, command=lambda: storelocation.open_storelocation_window(root, mycursor))
-show_storelocation_button.grid(row=19, column=0, padx=10, pady=0)
+show_storelocation_button.grid(row=11, column=2, padx=10, pady=0)
 
 #################################################################################################
 
@@ -732,7 +732,7 @@ show_storelocation_button.grid(row=19, column=0, padx=10, pady=0)
 
 #####################################################
 rightframe = Frame(root, bg='white', relief=RIDGE)
-rightframe.place(x=320, y=70, width=800, height=550)
+rightframe.place(x=320, y=70, width=0, height=550)
 #####################################################
 
 ScrollbarX = Scrollbar(rightframe, orient=HORIZONTAL)
