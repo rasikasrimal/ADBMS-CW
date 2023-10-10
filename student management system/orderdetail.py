@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import ttk
 
 
-def open_customer_window(root, mycursor):
+def open_orderdetail_window(root, mycursor):
     orderdetail_window = Toplevel(root)
     orderdetail_window.title('orderdetail Data')
     orderdetail_window.geometry('800x550')
@@ -14,8 +14,7 @@ def open_customer_window(root, mycursor):
     orderdetail_scroll_y = Scrollbar(orderdetail_frame, orient=VERTICAL)
 
     orderdetail_table = ttk.Treeview(orderdetail_frame, columns=(
-        'CustomerID', 'FirstName', 'LastName', 'Email', 'Phone', 'Address',
-        'RegistrationDate', 'LoyaltyPoints'),
+        'OrderDetailID' , 'OrderID', 'ProductID' ,'Quantity' ,'Subtotal'),
         xscrollcommand=orderdetail_scroll_x.set,
         yscrollcommand=orderdetail_scroll_y.set)
 
@@ -27,30 +26,24 @@ def open_customer_window(root, mycursor):
 
     orderdetail_table.pack(fill=BOTH, expand=1)
 
-    orderdetail_table.heading('CustomerID', text='CustomerID')
-    orderdetail_table.heading('FirstName', text='FirstName')
-    orderdetail_table.heading('LastName', text='LastName')
-    orderdetail_table.heading('Email', text='Email')
-    orderdetail_table.heading('Phone', text='Phone')
-    orderdetail_table.heading('Address', text='Address')
-    orderdetail_table.heading('RegistrationDate', text='RegistrationDate')
-    orderdetail_table.heading('LoyaltyPoints', text='LoyaltyPoints')
+    orderdetail_table.heading('OrderDetailID', text='OrderDetailID')
+    orderdetail_table.heading('OrderID', text='OrderID')
+    orderdetail_table.heading('ProductID', text='ProductID')
+    orderdetail_table.heading('Quantity', text='Quantity')
+    orderdetail_table.heading('Subtotal', text='Subtotal')
 
-    orderdetail_table.column('CustomerID', width=20, anchor=CENTER)
-    orderdetail_table.column('FirstName', width=60, anchor=CENTER)
-    orderdetail_table.column('LastName', width=60, anchor=CENTER)
-    orderdetail_table.column('Email', width=60, anchor=CENTER)
-    orderdetail_table.column('Phone', width=60, anchor=CENTER)
-    orderdetail_table.column('Address', width=60, anchor=CENTER)
-    orderdetail_table.column('RegistrationDate', width=60, anchor=CENTER)
-    orderdetail_table.column('LoyaltyPoints', width=60, anchor=CENTER)
+    orderdetail_table.column('OrderDetailID', width=20, anchor=CENTER)
+    orderdetail_table.column('OrderID', width=60, anchor=CENTER)
+    orderdetail_table.column('ProductID', width=60, anchor=CENTER)
+    orderdetail_table.column('Quantity', width=60, anchor=CENTER)
+    orderdetail_table.column('Subtotal', width=60, anchor=CENTER)
 
     style = ttk.Style()
     style.configure('Treeview', rowheight=40, font=('Helvetica', 10), foreground='black', background='white', fieldbackground='white')
     style.configure('Treeview.Heading', font=('Helvetica', 12, 'bold'), foreground='black', background='light green', fieldbackground='grey')
     orderdetail_table.config(show='headings')
 
-    query='SELECT * FROM corderdetail'
+    query='SELECT * FROM orderdetails'
     mycursor.execute(query)
     fetched_data=mycursor.fetchall()
 

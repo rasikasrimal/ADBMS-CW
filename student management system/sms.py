@@ -267,6 +267,87 @@ def show_order():
     for data in fetched_data:
         data_list=list(data)
         order_table.insert('',END,values=data_list)
+
+def show_orderdetail():
+    query='SELECT * FROM orderdetails'
+    mycursor.execute(query)
+    fetched_data=mycursor.fetchall()
+    orderdetail_table.delete(*orderdetail_table.get_children())
+    for data in fetched_data:
+        data_list=list(data)
+        orderdetail_table.insert('',END,values=data_list)
+
+def show_employee():
+    query='SELECT * FROM orders'
+    mycursor.execute(query)
+    fetched_data=mycursor.fetchall()
+    employee_table.delete(*employee_table.get_children())
+    for data in fetched_data:
+        data_list=list(data)
+        employee_table.insert('',END,values=data_list)
+
+def show_sale():
+    query='SELECT * FROM sales'
+    mycursor.execute(query)
+    fetched_data=mycursor.fetchall()
+    sale_table.delete(*sale_table.get_children())
+    for data in fetched_data:
+        data_list=list(data)
+        sale_table.insert('',END,values=data_list)
+
+def show_promotions():
+    query='SELECT * FROM promotions'
+    mycursor.execute(query)
+    fetched_data=mycursor.fetchall()
+    promotions_table.delete(*promotions_table.get_children())
+    for data in fetched_data:
+        data_list=list(data)
+        promotions.insert('',END,values=data_list)
+
+def show_promotionusage():
+    query='SELECT * FROM promotionusage'
+    mycursor.execute(query)
+    fetched_data=mycursor.fetchall()
+    promotionusage_table.delete(*promotionusage_table.get_children())
+    for data in fetched_data:
+        data_list=list(data)
+        promotionusage_table.insert('',END,values=data_list)
+
+def show_inventory():
+    query='SELECT * FROM inventory'
+    mycursor.execute(query)
+    fetched_data=mycursor.fetchall()
+    inventory_table.delete(*inventory_table.get_children())
+    for data in fetched_data:
+        data_list=list(data)
+        inventory_table.insert('',END,values=data_list)
+
+def show_supplier():
+    query='SELECT * FROM supplier'
+    mycursor.execute(query)
+    fetched_data=mycursor.fetchall()
+    supplier_table.delete(*supplier_table.get_children())
+    for data in fetched_data:
+        data_list=list(data)
+        supplier_table.insert('',END,values=data_list)
+
+def show_transaction():
+    query='SELECT * FROM transaction'
+    mycursor.execute(query)
+    fetched_data=mycursor.fetchall()
+    transaction_table.delete(*transaction_table.get_children())
+    for data in fetched_data:
+        data_list=list(data)
+        transaction_table.insert('',END,values=data_list)
+
+def show_storelocation():
+    query='SELECT * FROM storelocation'
+    mycursor.execute(query)
+    fetched_data=mycursor.fetchall()
+    storelocation_table.delete(*storelocation_table.get_children())
+    for data in fetched_data:
+        data_list=list(data)
+        storelocation_table.insert('',END,values=data_list)
 #################################################################################################
 
 # def search_data():
@@ -616,31 +697,31 @@ show_order_button = ttk.Button(leftFrame, text='Show Order', width=25, state=DIS
 show_order_button.grid(row=10, column=0, padx=10, pady=0)
 
 #################################################################################################
-show_employee_button = ttk.Button(leftFrame, text='Show Order', width=25, state=DISABLED, command=lambda: order.open_employee_window(root, mycursor))
+show_employee_button = ttk.Button(leftFrame, text='Show Employee', width=25, state=DISABLED, command=lambda: employee.open_employee_window(root, mycursor))
 show_employee_button.grid(row=11, column=0, padx=10, pady=0)
 
-show_orderdetail_button = ttk.Button(leftFrame, text='Show Order', width=25, state=DISABLED, command=lambda: order.open_orderdetail_window(root, mycursor))
+show_orderdetail_button = ttk.Button(leftFrame, text='Order Detail', width=25, state=DISABLED, command=lambda: orderdetail.open_orderdetail_window(root, mycursor))
 show_orderdetail_button.grid(row=12, column=0, padx=10, pady=0)
 
-show_sale_button = ttk.Button(leftFrame, text='Show Order', width=25, state=DISABLED, command=lambda: order.open_sale_window(root, mycursor))
+show_sale_button = ttk.Button(leftFrame, text='Sales', width=25, state=DISABLED, command=lambda: sale.open_sale_window(root, mycursor))
 show_sale_button.grid(row=13, column=0, padx=10, pady=0)
 
-show_promotion_button = ttk.Button(leftFrame, text='Show Order', width=25, state=DISABLED, command=lambda: order.open_promotion_window(root, mycursor))
+show_promotion_button = ttk.Button(leftFrame, text='Promotion', width=25, state=DISABLED, command=lambda: promotion.open_promotion_window(root, mycursor))
 show_promotion_button.grid(row=14, column=0, padx=10, pady=0)
 
-show_promotionusage_button = ttk.Button(leftFrame, text='Show Order', width=25, state=DISABLED, command=lambda: order.open_promotionusage_window(root, mycursor))
+show_promotionusage_button = ttk.Button(leftFrame, text='Promotion Usage', width=25, state=DISABLED, command=lambda: promotionusage.open_promotionusage_window(root, mycursor))
 show_promotionusage_button.grid(row=15, column=0, padx=10, pady=0)
 
-show_inventory_button = ttk.Button(leftFrame, text='Show Order', width=25, state=DISABLED, command=lambda: order.open_inventory_window(root, mycursor))
+show_inventory_button = ttk.Button(leftFrame, text='Show Inventory', width=25, state=DISABLED, command=lambda: inventory.open_inventory_window(root, mycursor))
 show_inventory_button.grid(row=16, column=0, padx=10, pady=0)
 
-show_supplier_button = ttk.Button(leftFrame, text='Show Order', width=25, state=DISABLED, command=lambda: order.open_supplier_window(root, mycursor))
+show_supplier_button = ttk.Button(leftFrame, text='Show supplier', width=25, state=DISABLED, command=lambda: supplier.open_supplier_window(root, mycursor))
 show_supplier_button.grid(row=17, column=0, padx=10, pady=0)
 
-show_transaction_button = ttk.Button(leftFrame, text='Show Order', width=25, state=DISABLED, command=lambda: order.open_transaction_window(root, mycursor))
+show_transaction_button = ttk.Button(leftFrame, text='Show transaction', width=25, state=DISABLED, command=lambda: transaction.open_transaction_window(root, mycursor))
 show_transaction_button.grid(row=18, column=0, padx=10, pady=0)
 
-show_storelocation_button = ttk.Button(leftFrame, text='Show Order', width=25, state=DISABLED, command=lambda: order.open_storelocation_window(root, mycursor))
+show_storelocation_button = ttk.Button(leftFrame, text='Show storelocation', width=25, state=DISABLED, command=lambda: storelocation.open_storelocation_window(root, mycursor))
 show_storelocation_button.grid(row=19, column=0, padx=10, pady=0)
 
 #################################################################################################
