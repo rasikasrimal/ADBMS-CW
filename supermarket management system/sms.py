@@ -713,7 +713,7 @@ show_promotionusage_button = ttk.Button(leftFrame, text='Promotion Usage', width
 show_promotionusage_button.grid(row=7, column=1, padx=10, pady=0)
 
 show_inventory_button = ttk.Button(leftFrame, text='Show Inventory', width=25, state=DISABLED, command=lambda: inventory.open_inventory_window(root, mycursor))
-show_inventory_button.grid(row=8, column=2, padx=10, pady=0)
+show_inventory_button.grid(row=8, column=1, padx=10, pady=0)
 
 show_supplier_button = ttk.Button(leftFrame, text='Show supplier', width=25, state=DISABLED, command=lambda: supplier.open_supplier_window(root, mycursor))
 show_supplier_button.grid(row=9, column=2, padx=10, pady=0)
