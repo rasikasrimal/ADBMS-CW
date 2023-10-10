@@ -2,54 +2,54 @@ from tkinter import *
 from tkinter import ttk
 
 
-def open_order_window(root, mycursor):
-    order_window = Toplevel(root)
-    order_window.title('order Data')
-    order_window.geometry('800x550')
+def open_sale_window(root, mycursor):
+    sale_window = Toplevel(root)
+    sale_window.title('sale Data')
+    sale_window.geometry('800x550')
 
-    order_frame = Frame(order_window, bg='white', relief=RIDGE)
-    order_frame.pack(fill=BOTH, expand=1)
+    sale_frame = Frame(sale_window, bg='white', relief=RIDGE)
+    sale_frame.pack(fill=BOTH, expand=1)
 
-    order_scroll_x = Scrollbar(order_frame, orient=HORIZONTAL)
-    order_scroll_y = Scrollbar(order_frame, orient=VERTICAL)
+    sale_scroll_x = Scrollbar(sale_frame, orient=HORIZONTAL)
+    sale_scroll_y = Scrollbar(sale_frame, orient=VERTICAL)
 
-    order_table = ttk.Treeview(order_frame, columns=(
-        'OrderID', 'CustomerID', 'OrderDate', 'TotalAmount', 'PaymentMethod', 'PaymentDate'
+    sale_table = ttk.Treeview(sale_frame, columns=(
+        'saleID', 'CustomerID', 'saleDate', 'TotalAmount', 'PaymentMethod', 'PaymentDate'
     ),
-        xscrollcommand=order_scroll_x.set,
-        yscrollcommand=order_scroll_y.set)
+        xscrollcommand=sale_scroll_x.set,
+        yscrollcommand=sale_scroll_y.set)
 
-    order_scroll_x.config(command=order_table.xview)
-    order_scroll_y.config(command=order_table.yview)
+    sale_scroll_x.config(command=sale_table.xview)
+    sale_scroll_y.config(command=sale_table.yview)
 
-    order_scroll_x.pack(side=BOTTOM, fill=X)
-    order_scroll_y.pack(side=RIGHT, fill=Y)
+    sale_scroll_x.pack(side=BOTTOM, fill=X)
+    sale_scroll_y.pack(side=RIGHT, fill=Y)
 
-    order_table.pack(fill=BOTH, expand=1)
+    sale_table.pack(fill=BOTH, expand=1)
 
-    order_table.heading('OrderID', text='OrderID')
-    order_table.heading('CustomerID', text='CustomerID')
-    order_table.heading('OrderDate', text='OrderDate')
-    order_table.heading('TotalAmount', text='TotalAmount')
-    order_table.heading('PaymentMethod', text='PaymentMethod')
-    order_table.heading('PaymentDate', text='PaymentDate')
+    sale_table.heading('saleID', text='saleID')
+    sale_table.heading('CustomerID', text='CustomerID')
+    sale_table.heading('saleDate', text='saleDate')
+    sale_table.heading('TotalAmount', text='TotalAmount')
+    sale_table.heading('PaymentMethod', text='PaymentMethod')
+    sale_table.heading('PaymentDate', text='PaymentDate')
 
-    order_table.column('OrderID', width=20, anchor=CENTER)
-    order_table.column('CustomerID', width=60, anchor=CENTER)
-    order_table.column('OrderDate', width=60, anchor=CENTER)
-    order_table.column('TotalAmount', width=60, anchor=CENTER)
-    order_table.column('PaymentMethod', width=60, anchor=CENTER)
-    order_table.column('PaymentDate', width=60, anchor=CENTER)
+    sale_table.column('saleID', width=20, anchor=CENTER)
+    sale_table.column('CustomerID', width=60, anchor=CENTER)
+    sale_table.column('saleDate', width=60, anchor=CENTER)
+    sale_table.column('TotalAmount', width=60, anchor=CENTER)
+    sale_table.column('PaymentMethod', width=60, anchor=CENTER)
+    sale_table.column('PaymentDate', width=60, anchor=CENTER)
 
     style = ttk.Style()
     style.configure('Treeview', rowheight=40, font=('Helvetica', 10), foreground='black', background='white', fieldbackground='white')
     style.configure('Treeview.Heading', font=('Helvetica', 12, 'bold'), foreground='black', background='light green', fieldbackground='grey')
-    order_table.config(show='headings')
+    sale_table.config(show='headings')
 
-    query='SELECT * FROM orders'
+    query='SELECT * FROM sales'
     mycursor.execute(query)
     fetched_data=mycursor.fetchall()
 
     for data in fetched_data:
         data_list=list(data)
-        order_table.insert('',END,values=data_list)
+        sale_table.insert('',END,values=data_list)
