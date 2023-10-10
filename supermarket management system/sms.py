@@ -562,6 +562,13 @@ def connect_database():
                 Phone VARCHAR(15),
                 Address VARCHAR(255)
             );
+
+            CREATE TABLE visits (
+                visit_id INT PRIMARY KEY,
+                customer_id INT,
+                FOREIGN KEY (customer_id) REFERENCES Customers(CustomerID)
+            );
+
                 '''
             mycursor.execute(query)
         except:
@@ -750,33 +757,33 @@ student_table = ttk.Treeview(rightframe, columns=(
 #         xscrollcommand=ScrollbarX.set,
 #         yscrollcommand=ScrollbarY.set)
 
-ScrollbarX.config(command=student_table.xview)
-ScrollbarY.config(command=student_table.yview)
+# ScrollbarX.config(command=student_table.xview)
+# ScrollbarY.config(command=student_table.yview)
 
-ScrollbarX.pack(side=BOTTOM, fill=X)
-ScrollbarY.pack(side=RIGHT, fill=Y)
+# ScrollbarX.pack(side=BOTTOM, fill=X)
+# ScrollbarY.pack(side=RIGHT, fill=Y)
 
-student_table.pack(fill=BOTH, expand=1)
+# student_table.pack(fill=BOTH, expand=1)
 
-student_table.heading('ID', text='ID')
-student_table.heading('Name', text='Name')
-student_table.heading('Mobile No', text='Mobile No')
-student_table.heading('Email', text='Email')
-student_table.heading('Address', text='Address')
-student_table.heading('Gender', text='Gender')
-student_table.heading('DOB', text='DOB')
-student_table.heading('Added Date', text='Added Date')
-student_table.heading('Added Time', text='Added Time')
+# student_table.heading('ID', text='ID')
+# student_table.heading('Name', text='Name')
+# student_table.heading('Mobile No', text='Mobile No')
+# student_table.heading('Email', text='Email')
+# student_table.heading('Address', text='Address')
+# student_table.heading('Gender', text='Gender')
+# student_table.heading('DOB', text='DOB')
+# student_table.heading('Added Date', text='Added Date')
+# student_table.heading('Added Time', text='Added Time')
 
-student_table.column('ID', width=20, anchor=CENTER)
-student_table.column('Name', width=60, anchor=CENTER)
-student_table.column('Mobile No', width=60, anchor=CENTER)
-student_table.column('Email', width=60, anchor=CENTER)
-student_table.column('Address', width=60, anchor=CENTER)
-student_table.column('Gender', width=30, anchor=CENTER)
-student_table.column('DOB', width=60, anchor=CENTER)
-student_table.column('Added Date', width=60, anchor=CENTER)
-student_table.column('Added Time', width=60, anchor=CENTER)
+# student_table.column('ID', width=20, anchor=CENTER)
+# student_table.column('Name', width=60, anchor=CENTER)
+# student_table.column('Mobile No', width=60, anchor=CENTER)
+# student_table.column('Email', width=60, anchor=CENTER)
+# student_table.column('Address', width=60, anchor=CENTER)
+# student_table.column('Gender', width=30, anchor=CENTER)
+# student_table.column('DOB', width=60, anchor=CENTER)
+# student_table.column('Added Date', width=60, anchor=CENTER)
+# student_table.column('Added Time', width=60, anchor=CENTER)
 
 style = ttk.Style()
 style.configure('Treeview', rowheight=40, font=('Helvetica', 10), foreground='black', background='white', fieldbackground='white')
