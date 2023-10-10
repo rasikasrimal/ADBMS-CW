@@ -2,54 +2,54 @@ from tkinter import *
 from tkinter import ttk
 
 
-def open_order_window(root, mycursor):
-    order_window = Toplevel(root)
-    order_window.title('order Data')
-    order_window.geometry('800x550')
+def open_transaction_window(root, mycursor):
+    transaction_window = Toplevel(root)
+    transaction_window.title('transaction Data')
+    transaction_window.geometry('800x550')
 
-    order_frame = Frame(order_window, bg='white', relief=RIDGE)
-    order_frame.pack(fill=BOTH, expand=1)
+    transaction_frame = Frame(transaction_window, bg='white', relief=RIDGE)
+    transaction_frame.pack(fill=BOTH, expand=1)
 
-    order_scroll_x = Scrollbar(order_frame, orient=HORIZONTAL)
-    order_scroll_y = Scrollbar(order_frame, orient=VERTICAL)
+    transaction_scroll_x = Scrollbar(transaction_frame, orient=HORIZONTAL)
+    transaction_scroll_y = Scrollbar(transaction_frame, orient=VERTICAL)
 
-    order_table = ttk.Treeview(order_frame, columns=(
-        'OrderID', 'CustomerID', 'OrderDate', 'TotalAmount', 'PaymentMethod', 'PaymentDate'
+    transaction_table = ttk.Treeview(transaction_frame, columns=(
+         'TransactionID' , 'TransactionType' , 'Date'       , 'Amount' , 'Description'              , 'OrderID'
     ),
-        xscrollcommand=order_scroll_x.set,
-        yscrollcommand=order_scroll_y.set)
+        xscrollcommand=transaction_scroll_x.set,
+        yscrollcommand=transaction_scroll_y.set)
 
-    order_scroll_x.config(command=order_table.xview)
-    order_scroll_y.config(command=order_table.yview)
+    transaction_scroll_x.config(command=transaction_table.xview)
+    transaction_scroll_y.config(command=transaction_table.yview)
 
-    order_scroll_x.pack(side=BOTTOM, fill=X)
-    order_scroll_y.pack(side=RIGHT, fill=Y)
+    transaction_scroll_x.pack(side=BOTTOM, fill=X)
+    transaction_scroll_y.pack(side=RIGHT, fill=Y)
 
-    order_table.pack(fill=BOTH, expand=1)
+    transaction_table.pack(fill=BOTH, expand=1)
 
-    order_table.heading('OrderID', text='OrderID')
-    order_table.heading('CustomerID', text='CustomerID')
-    order_table.heading('OrderDate', text='OrderDate')
-    order_table.heading('TotalAmount', text='TotalAmount')
-    order_table.heading('PaymentMethod', text='PaymentMethod')
-    order_table.heading('PaymentDate', text='PaymentDate')
+    transaction_table.heading('TransactionID', text='TransactionID')
+    transaction_table.heading('TransactionType', text='TransactionType')
+    transaction_table.heading('Date', text='Date')
+    transaction_table.heading('Amount', text='Amount')
+    transaction_table.heading('Description', text='Description')
+    transaction_table.heading('OrderID', text='OrderID')
 
-    order_table.column('OrderID', width=20, anchor=CENTER)
-    order_table.column('CustomerID', width=60, anchor=CENTER)
-    order_table.column('OrderDate', width=60, anchor=CENTER)
-    order_table.column('TotalAmount', width=60, anchor=CENTER)
-    order_table.column('PaymentMethod', width=60, anchor=CENTER)
-    order_table.column('PaymentDate', width=60, anchor=CENTER)
+    transaction_table.column('TransactionID', width=20, anchor=CENTER)
+    transaction_table.column('TransactionType', width=60, anchor=CENTER)
+    transaction_table.column('Date', width=60, anchor=CENTER)
+    transaction_table.column('Amount', width=60, anchor=CENTER)
+    transaction_table.column('Description', width=60, anchor=CENTER)
+    transaction_table.column('OrderID', width=60, anchor=CENTER)
 
     style = ttk.Style()
     style.configure('Treeview', rowheight=40, font=('Helvetica', 10), foreground='black', background='white', fieldbackground='white')
     style.configure('Treeview.Heading', font=('Helvetica', 12, 'bold'), foreground='black', background='light green', fieldbackground='grey')
-    order_table.config(show='headings')
+    transaction_table.config(show='headings')
 
-    query='SELECT * FROM orders'
+    query='SELECT * FROM transactions'
     mycursor.execute(query)
     fetched_data=mycursor.fetchall()
 
     for data in fetched_data:
         data_list=list(data)
-        order_table.insert('',END,values=data_list)
+        transaction_table.insert('',END,values=data_list)
