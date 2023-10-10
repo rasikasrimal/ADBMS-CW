@@ -22,6 +22,8 @@ import inventory
 import supplier
 import transaction
 import storelocation
+import visits
+import customers_
 
 
 
@@ -341,13 +343,38 @@ def show_transaction():
         transaction_table.insert('',END,values=data_list)
 
 def show_storelocation():
-    query='SELECT * FROM storelocation'
+    query='SELECT * FROM storelocations'
     mycursor.execute(query)
     fetched_data=mycursor.fetchall()
     storelocation_table.delete(*storelocation_table.get_children())
     for data in fetched_data:
         data_list=list(data)
         storelocation_table.insert('',END,values=data_list)
+
+def show_visits():
+    query='SELECT * FROM storelocation'
+    mycursor.execute(query)
+    fetched_data=mycursor.fetchall()
+    visits_table.delete(*visits_table.get_children())
+    for data in fetched_data:
+        data_list=list(data)
+        visits_table.insert('',END,values=data_list)
+
+def show_customers_():
+    query='''
+    select v.customer_id, count(*) AS count
+    from visits as v
+    left join transactions as t
+    on v.visit_id = t.visit_id
+    where t.transaction_id IS NULL
+    GROUP BY v.customer_id;
+    '''
+    mycursor.execute(query)
+    fetched_data=mycursor.fetchall()
+    customers__table.delete(*customers__table.get_children())
+    for data in fetched_data:
+        data_list=list(data)
+        customers__table.insert('',END,values=data_list)
 #################################################################################################
 
 # def search_data():
@@ -563,7 +590,7 @@ def connect_database():
                 Address VARCHAR(255)
             );
 
-            CREATE TABLE visits (
+            CREATE TABLE IF NOT EXISTS visits (
                 visit_id INT PRIMARY KEY,
                 customer_id INT,
                 FOREIGN KEY (customer_id) REFERENCES Customers(CustomerID)
@@ -584,8 +611,8 @@ def connect_database():
         # searchstudentButton.config(state=NORMAL)
         updatestudentButton.config(state=NORMAL)
         showstudentButton.config(state=NORMAL)
-        exportDataButton.config(state=NORMAL)
-        deletestudentButton.config(state=NORMAL)
+        # exportDataButton.config(state=NORMAL)
+        # deletestudentButton.config(state=NORMAL)
         show_customer_button.config(state=NORMAL)
         show_product_button.config(state=NORMAL)
         show_order_button.config(state=NORMAL)
@@ -599,6 +626,8 @@ def connect_database():
         show_supplier_button.config(state=NORMAL)
         show_transaction_button.config(state=NORMAL)
         show_storelocation_button.config(state=NORMAL)
+        show_visit_button.config(state=NORMAL)
+        show_customers__button.config(state=NORMAL)
 
         # OrderDetails
         # Employees
@@ -679,8 +708,8 @@ addstudentButton.grid(row=1, column=0, padx=10, pady=0)
 # searchstudentButton = ttk.Button(leftFrame, text='Search Student', width=25, state=DISABLED, command=lambda: toplevel_date('Search Student', 'Search Student', search_data))
 # searchstudentButton.grid(row=2, column=0, padx=10, pady=0)
 
-deletestudentButton = ttk.Button(leftFrame, text='Delete Student', width=25, state=DISABLED, command=lambda: delete_ops.delete_student(mycursor, con, student_table))
-deletestudentButton.grid(row=3, column=0, padx=10, pady=0)
+# deletestudentButton = ttk.Button(leftFrame, text='Delete Student', width=25, state=DISABLED, command=lambda: delete_ops.delete_student(mycursor, con, student_table))
+# deletestudentButton.grid(row=3, column=0, padx=10, pady=0)
 
 updatestudentButton = ttk.Button(leftFrame, text='Update Student', width=25, state=DISABLED, command=lambda: toplevel_date('Update Student', 'Update Student', update_data))
 updatestudentButton.grid(row=4, column=0, padx=10, pady=0)
@@ -688,8 +717,8 @@ updatestudentButton.grid(row=4, column=0, padx=10, pady=0)
 showstudentButton = ttk.Button(leftFrame, text='Show Customer OLD', width=25, state=DISABLED, command=show_customer)
 showstudentButton.grid(row=5, column=0, padx=10, pady=0)
 
-exportDataButton = ttk.Button(leftFrame, text='Export Data', width=25, state=DISABLED, command=lambda: export_ops.export_data(student_table))
-exportDataButton.grid(row=6, column=0, padx=10, pady=0)
+# exportDataButton = ttk.Button(leftFrame, text='Export Data', width=25, state=DISABLED, command=lambda: export_ops.export_data(student_table))
+# exportDataButton.grid(row=6, column=0, padx=10, pady=0)
 
 exitButton = ttk.Button(leftFrame, text='Exit', width=25, command=lambda: exit_ops.handle_exit(root))
 exitButton.grid(row=7, column=0, padx=10, pady=0)
@@ -731,6 +760,12 @@ show_transaction_button.grid(row=10, column=1, padx=10, pady=0)
 show_storelocation_button = ttk.Button(leftFrame, text='Show storelocation', width=25, state=DISABLED, command=lambda: storelocation.open_storelocation_window(root, mycursor))
 show_storelocation_button.grid(row=11, column=1, padx=10, pady=0)
 
+show_visit_button = ttk.Button(leftFrame, text='Visits', width=25, state=DISABLED, command=lambda: visits.open_visit_window(root, mycursor))
+show_visit_button.grid(row=1, column=2, padx=10, pady=0)
+
+show_customers__button = ttk.Button(leftFrame, text='customers_', width=25, state=DISABLED, command=lambda: customers_.open_customers__window(root, mycursor))
+show_customers__button.grid(row=2, column=2, padx=10, pady=0)
+
 #################################################################################################
 
 
@@ -745,11 +780,11 @@ rightframe.place(x=320, y=70, width=0, height=550)
 ScrollbarX = Scrollbar(rightframe, orient=HORIZONTAL)
 ScrollbarY = Scrollbar(rightframe, orient=VERTICAL)
 
-student_table = ttk.Treeview(rightframe, columns=(
-    'ID', 'Name', 'Mobile No', 'Email', 'Address', 
-    'Gender','DOB', 'Added Date', 'Added Time' ),
-        xscrollcommand=ScrollbarX.set,
-        yscrollcommand=ScrollbarY.set)
+# student_table = ttk.Treeview(rightframe, columns=(
+#     'ID', 'Name', 'Mobile No', 'Email', 'Address', 
+#     'Gender','DOB', 'Added Date', 'Added Time' ),
+#         xscrollcommand=ScrollbarX.set,
+#         yscrollcommand=ScrollbarY.set)
 #################################################################################################
 # customer_table = ttk.Treeview(rightframe, columns=(
 #     'CustomerID', 'FirstName', 'LastName', 'Email', 'Phone', 'Address', 
@@ -788,7 +823,7 @@ student_table = ttk.Treeview(rightframe, columns=(
 style = ttk.Style()
 style.configure('Treeview', rowheight=40, font=('Helvetica', 10), foreground='black', background='white', fieldbackground='white')
 style.configure('Treeview.Heading', font=('Helvetica', 12, 'bold'), foreground='black', background='light green', fieldbackground='grey')
-student_table.config(show='headings')
+# student_table.config(show='headings')
 
 
 root.mainloop()
