@@ -10,6 +10,19 @@ import export_operations as export_ops
 import delete_operations as delete_ops
 
 import customer
+import product
+import order
+
+import orderdetail
+import employee
+import sale
+import promotion
+import promotionusage
+import inventory
+import supplier
+import transaction
+import storelocation
+
 
 
 
@@ -232,29 +245,46 @@ def show_customer():
     query='SELECT * FROM customers'
     mycursor.execute(query)
     fetched_data=mycursor.fetchall()
-    student_table.delete(*student_table.get_children())
+    customer_table.delete(*customer_table.get_children())
     for data in fetched_data:
         data_list=list(data)
-        student_table.insert('',END,values=data_list)
+        customer_table.insert('',END,values=data_list)
 
+def show_product():
+    query='SELECT * FROM products'
+    mycursor.execute(query)
+    fetched_data=mycursor.fetchall()
+    product_table.delete(*product_table.get_children())
+    for data in fetched_data:
+        data_list=list(data)
+        product_table.insert('',END,values=data_list)
+
+def show_order():
+    query='SELECT * FROM orders'
+    mycursor.execute(query)
+    fetched_data=mycursor.fetchall()
+    order_table.delete(*order_table.get_children())
+    for data in fetched_data:
+        data_list=list(data)
+        order_table.insert('',END,values=data_list)
 #################################################################################################
 
-def search_data():
-    query = 'SELECT * FROM student WHERE id=%s or Name=%s or Email=%s or mobile=%s or gender=%s or dob=%s' #or address=%s'
+# def search_data():
+#     query = 'SELECT * FROM student WHERE id=%s or Name=%s or Email=%s or mobile=%s or gender=%s or dob=%s' #or address=%s'
 
-    mycursor.execute(query, (
-        idEntry.get(),
-        nameEntry.get(),
-        emailEntry.get(),
-        mobileEntry.get(), 
-        # addressEntry.get(),
-        genderEntry.get(), 
-        dobEntry.get() 
-        ))
-    student_table.delete(*student_table.get_children())
-    fetched_data = mycursor.fetchall()
-    for data in fetched_data:
-        student_table.insert('', END, values=data)
+#     mycursor.execute(query, (
+#         idEntry.get(),
+#         nameEntry.get(),
+#         emailEntry.get(),
+#         mobileEntry.get(), 
+#         # addressEntry.get(),
+#         genderEntry.get(), 
+#         dobEntry.get() 
+#         ))
+#     student_table.delete(*student_table.get_children())
+#     fetched_data = mycursor.fetchall()
+#     for data in fetched_data:
+#         student_table.insert('', END, values=data)
 
 #################################################################################################
 
@@ -463,12 +493,34 @@ def connect_database():
         messagebox.showinfo('Success', 'Connected to Database')
         connectWindow.destroy()
         addstudentButton.config(state=NORMAL)
-        searchstudentButton.config(state=NORMAL)
+        # searchstudentButton.config(state=NORMAL)
         updatestudentButton.config(state=NORMAL)
         showstudentButton.config(state=NORMAL)
         exportDataButton.config(state=NORMAL)
         deletestudentButton.config(state=NORMAL)
-        show_treeview_button.config(state=NORMAL)
+        show_customer_button.config(state=NORMAL)
+        show_product_button.config(state=NORMAL)
+        show_order_button.config(state=NORMAL)
+
+        show_orderdetail_button.config(state=NORMAL)
+        show_employee_button.config(state=NORMAL)
+        show_sale_button.config(state=NORMAL)
+        show_promotion_button.config(state=NORMAL)
+        show_promotionusage_button.config(state=NORMAL)
+        show_inventory_button.config(state=NORMAL)
+        show_supplier_button.config(state=NORMAL)
+        show_transaction_button.config(state=NORMAL)
+        show_storelocation_button.config(state=NORMAL)
+
+        # OrderDetails
+        # Employees
+        # Sales
+        # Promotions
+        # PromotionUsage
+        # Inventory
+        # Suppliers
+        # Transactions
+        # StoreLocations
 
 #############################################################
 
@@ -536,8 +588,8 @@ logo_label.grid(row=0, column=0, padx=10, pady=10)
 addstudentButton = ttk.Button(leftFrame, text='Add Student', width=25, state=DISABLED, command=lambda: toplevel_date('Add Student', 'Add Student', add_data))
 addstudentButton.grid(row=1, column=0, padx=10, pady=0)
 
-searchstudentButton = ttk.Button(leftFrame, text='Search Student', width=25, state=DISABLED, command=lambda: toplevel_date('Search Student', 'Search Student', search_data))
-searchstudentButton.grid(row=2, column=0, padx=10, pady=0)
+# searchstudentButton = ttk.Button(leftFrame, text='Search Student', width=25, state=DISABLED, command=lambda: toplevel_date('Search Student', 'Search Student', search_data))
+# searchstudentButton.grid(row=2, column=0, padx=10, pady=0)
 
 deletestudentButton = ttk.Button(leftFrame, text='Delete Student', width=25, state=DISABLED, command=lambda: delete_ops.delete_student(mycursor, con, student_table))
 deletestudentButton.grid(row=3, column=0, padx=10, pady=0)
@@ -554,8 +606,46 @@ exportDataButton.grid(row=6, column=0, padx=10, pady=0)
 exitButton = ttk.Button(leftFrame, text='Exit', width=25, command=lambda: exit_ops.handle_exit(root))
 exitButton.grid(row=7, column=0, padx=10, pady=0)
 
-show_treeview_button = ttk.Button(leftFrame, text='Show Customers', width=25, state=DISABLED, command=lambda: customer.open_customer_window(root, mycursor))
-show_treeview_button.grid(row=8, column=0, padx=10, pady=0)
+show_customer_button = ttk.Button(leftFrame, text='Show Customers', width=25, state=DISABLED, command=lambda: customer.open_customer_window(root, mycursor))
+show_customer_button.grid(row=8, column=0, padx=10, pady=0)
+
+show_product_button = ttk.Button(leftFrame, text='Show Products', width=25, state=DISABLED, command=lambda: product.open_product_window(root, mycursor))
+show_product_button.grid(row=9, column=0, padx=10, pady=0)
+
+show_order_button = ttk.Button(leftFrame, text='Show Order', width=25, state=DISABLED, command=lambda: order.open_order_window(root, mycursor))
+show_order_button.grid(row=10, column=0, padx=10, pady=0)
+
+#################################################################################################
+show_employee_button = ttk.Button(leftFrame, text='Show Order', width=25, state=DISABLED, command=lambda: order.open_employee_window(root, mycursor))
+show_employee_button.grid(row=11, column=0, padx=10, pady=0)
+
+show_orderdetail_button = ttk.Button(leftFrame, text='Show Order', width=25, state=DISABLED, command=lambda: order.open_orderdetail_window(root, mycursor))
+show_orderdetail_button.grid(row=12, column=0, padx=10, pady=0)
+
+show_sale_button = ttk.Button(leftFrame, text='Show Order', width=25, state=DISABLED, command=lambda: order.open_sale_window(root, mycursor))
+show_sale_button.grid(row=13, column=0, padx=10, pady=0)
+
+show_promotion_button = ttk.Button(leftFrame, text='Show Order', width=25, state=DISABLED, command=lambda: order.open_promotion_window(root, mycursor))
+show_promotion_button.grid(row=14, column=0, padx=10, pady=0)
+
+show_promotionusage_button = ttk.Button(leftFrame, text='Show Order', width=25, state=DISABLED, command=lambda: order.open_promotionusage_window(root, mycursor))
+show_promotionusage_button.grid(row=15, column=0, padx=10, pady=0)
+
+show_inventory_button = ttk.Button(leftFrame, text='Show Order', width=25, state=DISABLED, command=lambda: order.open_inventory_window(root, mycursor))
+show_inventory_button.grid(row=16, column=0, padx=10, pady=0)
+
+show_supplier_button = ttk.Button(leftFrame, text='Show Order', width=25, state=DISABLED, command=lambda: order.open_supplier_window(root, mycursor))
+show_supplier_button.grid(row=17, column=0, padx=10, pady=0)
+
+show_transaction_button = ttk.Button(leftFrame, text='Show Order', width=25, state=DISABLED, command=lambda: order.open_transaction_window(root, mycursor))
+show_transaction_button.grid(row=18, column=0, padx=10, pady=0)
+
+show_storelocation_button = ttk.Button(leftFrame, text='Show Order', width=25, state=DISABLED, command=lambda: order.open_storelocation_window(root, mycursor))
+show_storelocation_button.grid(row=19, column=0, padx=10, pady=0)
+
+#################################################################################################
+
+
 
 
 
@@ -573,11 +663,11 @@ student_table = ttk.Treeview(rightframe, columns=(
         xscrollcommand=ScrollbarX.set,
         yscrollcommand=ScrollbarY.set)
 #################################################################################################
-customer_table = ttk.Treeview(rightframe, columns=(
-    'CustomerID', 'FirstName', 'LastName', 'Email', 'Phone', 'Address', 
-    'RegistrationDate','LoyaltyPoints' ),
-        xscrollcommand=ScrollbarX.set,
-        yscrollcommand=ScrollbarY.set)
+# customer_table = ttk.Treeview(rightframe, columns=(
+#     'CustomerID', 'FirstName', 'LastName', 'Email', 'Phone', 'Address', 
+#     'RegistrationDate','LoyaltyPoints' ),
+#         xscrollcommand=ScrollbarX.set,
+#         yscrollcommand=ScrollbarY.set)
 
 ScrollbarX.config(command=student_table.xview)
 ScrollbarY.config(command=student_table.yview)
