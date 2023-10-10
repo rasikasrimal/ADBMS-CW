@@ -252,129 +252,129 @@ def show_customer():
         data_list=list(data)
         customer_table.insert('',END,values=data_list)
 
-def show_product():
-    query='SELECT * FROM products'
-    mycursor.execute(query)
-    fetched_data=mycursor.fetchall()
-    product_table.delete(*product_table.get_children())
-    for data in fetched_data:
-        data_list=list(data)
-        product_table.insert('',END,values=data_list)
+# def show_product():
+#     query='SELECT * FROM products'
+#     mycursor.execute(query)
+#     fetched_data=mycursor.fetchall()
+#     product_table.delete(*product_table.get_children())
+#     for data in fetched_data:
+#         data_list=list(data)
+#         product_table.insert('',END,values=data_list)
 
-def show_order():
-    query='SELECT * FROM orders'
-    mycursor.execute(query)
-    fetched_data=mycursor.fetchall()
-    order_table.delete(*order_table.get_children())
-    for data in fetched_data:
-        data_list=list(data)
-        order_table.insert('',END,values=data_list)
+# def show_order():
+#     query='SELECT * FROM orders'
+#     mycursor.execute(query)
+#     fetched_data=mycursor.fetchall()
+#     order_table.delete(*order_table.get_children())
+#     for data in fetched_data:
+#         data_list=list(data)
+#         order_table.insert('',END,values=data_list)
 
-def show_orderdetail():
-    query='SELECT * FROM orderdetails'
-    mycursor.execute(query)
-    fetched_data=mycursor.fetchall()
-    orderdetail_table.delete(*orderdetail_table.get_children())
-    for data in fetched_data:
-        data_list=list(data)
-        orderdetail_table.insert('',END,values=data_list)
+# def show_orderdetail():
+#     query='SELECT * FROM orderdetails'
+#     mycursor.execute(query)
+#     fetched_data=mycursor.fetchall()
+#     orderdetail_table.delete(*orderdetail_table.get_children())
+#     for data in fetched_data:
+#         data_list=list(data)
+#         orderdetail_table.insert('',END,values=data_list)
 
-def show_employee():
-    query='SELECT * FROM employees'
-    mycursor.execute(query)
-    fetched_data=mycursor.fetchall()
-    employee_table.delete(*employee_table.get_children())
-    for data in fetched_data:
-        data_list=list(data)
-        employee_table.insert('',END,values=data_list)
+# def show_employee():
+#     query='SELECT * FROM employees'
+#     mycursor.execute(query)
+#     fetched_data=mycursor.fetchall()
+#     employee_table.delete(*employee_table.get_children())
+#     for data in fetched_data:
+#         data_list=list(data)
+#         employee_table.insert('',END,values=data_list)
 
-def show_sale():
-    query='SELECT * FROM sales'
-    mycursor.execute(query)
-    fetched_data=mycursor.fetchall()
-    sale_table.delete(*sale_table.get_children())
-    for data in fetched_data:
-        data_list=list(data)
-        sale_table.insert('',END,values=data_list)
+# def show_sale():
+#     query='SELECT * FROM sales'
+#     mycursor.execute(query)
+#     fetched_data=mycursor.fetchall()
+#     sale_table.delete(*sale_table.get_children())
+#     for data in fetched_data:
+#         data_list=list(data)
+#         sale_table.insert('',END,values=data_list)
 
-def show_promotions():
-    query='SELECT * FROM promotions'
-    mycursor.execute(query)
-    fetched_data=mycursor.fetchall()
-    promotions_table.delete(*promotions_table.get_children())
-    for data in fetched_data:
-        data_list=list(data)
-        promotions.insert('',END,values=data_list)
+# def show_promotions():
+#     query='SELECT * FROM promotions'
+#     mycursor.execute(query)
+#     fetched_data=mycursor.fetchall()
+#     promotions_table.delete(*promotions_table.get_children())
+#     for data in fetched_data:
+#         data_list=list(data)
+#         promotions.insert('',END,values=data_list)
 
-def show_promotionusage():
-    query= 'select * from promotionusage'
-    mycursor.execute(query)
-    fetched_data=mycursor.fetchall()
-    promotionusage_table.delete(*promotionusage_table.get_children())
-    for data in fetched_data:
-        data_list=list(data)
-        promotionusage_table.insert('',END,values=data_list)
+# def show_promotionusage():
+#     query= 'select * from promotionusage'
+#     mycursor.execute(query)
+#     fetched_data=mycursor.fetchall()
+#     promotionusage_table.delete(*promotionusage_table.get_children())
+#     for data in fetched_data:
+#         data_list=list(data)
+#         promotionusage_table.insert('',END,values=data_list)
 
-def show_inventory():
-    query='SELECT * FROM inventory'
-    mycursor.execute(query)
-    fetched_data=mycursor.fetchall()
-    inventory_table.delete(*inventory_table.get_children())
-    for data in fetched_data:
-        data_list=list(data)
-        inventory_table.insert('',END,values=data_list)
+# def show_inventory():
+#     query='SELECT * FROM inventory'
+#     mycursor.execute(query)
+#     fetched_data=mycursor.fetchall()
+#     inventory_table.delete(*inventory_table.get_children())
+#     for data in fetched_data:
+#         data_list=list(data)
+#         inventory_table.insert('',END,values=data_list)
 
-def show_supplier():
-    query='SELECT * FROM supplier'
-    mycursor.execute(query)
-    fetched_data=mycursor.fetchall()
-    supplier_table.delete(*supplier_table.get_children())
-    for data in fetched_data:
-        data_list=list(data)
-        supplier_table.insert('',END,values=data_list)
+# def show_supplier():
+#     query='SELECT * FROM supplier'
+#     mycursor.execute(query)
+#     fetched_data=mycursor.fetchall()
+#     supplier_table.delete(*supplier_table.get_children())
+#     for data in fetched_data:
+#         data_list=list(data)
+#         supplier_table.insert('',END,values=data_list)
 
-def show_transaction():
-    query='SELECT * FROM transaction'
-    mycursor.execute(query)
-    fetched_data=mycursor.fetchall()
-    transaction_table.delete(*transaction_table.get_children())
-    for data in fetched_data:
-        data_list=list(data)
-        transaction_table.insert('',END,values=data_list)
+# def show_transaction():
+#     query='SELECT * FROM transaction'
+#     mycursor.execute(query)
+#     fetched_data=mycursor.fetchall()
+#     transaction_table.delete(*transaction_table.get_children())
+#     for data in fetched_data:
+#         data_list=list(data)
+#         transaction_table.insert('',END,values=data_list)
 
-def show_storelocation():
-    query='SELECT * FROM storelocations'
-    mycursor.execute(query)
-    fetched_data=mycursor.fetchall()
-    storelocation_table.delete(*storelocation_table.get_children())
-    for data in fetched_data:
-        data_list=list(data)
-        storelocation_table.insert('',END,values=data_list)
+# def show_storelocation():
+#     query='SELECT * FROM storelocations'
+#     mycursor.execute(query)
+#     fetched_data=mycursor.fetchall()
+#     storelocation_table.delete(*storelocation_table.get_children())
+#     for data in fetched_data:
+#         data_list=list(data)
+#         storelocation_table.insert('',END,values=data_list)
 
-def show_visits():
-    query='SELECT * FROM storelocation'
-    mycursor.execute(query)
-    fetched_data=mycursor.fetchall()
-    visits_table.delete(*visits_table.get_children())
-    for data in fetched_data:
-        data_list=list(data)
-        visits_table.insert('',END,values=data_list)
+# def show_visits():
+#     query='SELECT * FROM storelocation'
+#     mycursor.execute(query)
+#     fetched_data=mycursor.fetchall()
+#     visits_table.delete(*visits_table.get_children())
+#     for data in fetched_data:
+#         data_list=list(data)
+#         visits_table.insert('',END,values=data_list)
 
-def show_customers_():
-    query='''
-    select v.customer_id, count(*) AS count
-    from visits as v
-    left join transactions as t
-    on v.visit_id = t.visit_id
-    where t.transaction_id IS NULL
-    GROUP BY v.customer_id;
-    '''
-    mycursor.execute(query)
-    fetched_data=mycursor.fetchall()
-    customers__table.delete(*customers__table.get_children())
-    for data in fetched_data:
-        data_list=list(data)
-        customers__table.insert('',END,values=data_list)
+# def show_customers_():
+#     query='''
+#     select v.customer_id, count(*) AS count
+#     from visits as v
+#     left join transactions as t
+#     on v.visit_id = t.visit_id
+#     where t.transaction_id IS NULL
+#     GROUP BY v.customer_id;
+#     '''
+#     mycursor.execute(query)
+#     fetched_data=mycursor.fetchall()
+#     customers__table.delete(*customers__table.get_children())
+#     for data in fetched_data:
+#         data_list=list(data)
+#         customers__table.insert('',END,values=data_list)
 #################################################################################################
 
 # def search_data():
