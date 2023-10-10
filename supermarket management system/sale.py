@@ -28,15 +28,15 @@ def open_sale_window(root, mycursor):
     sale_table.pack(fill=BOTH, expand=1)
 
 
-    sale_table.heading('saleID', text='saleID')
-    sale_table.heading('EmployeeID', text='CustomerID')
-    sale_table.heading('saleDate', text='saleDate')
-    sale_table.heading('TotalAmount', text='TotalAmount')
+    sale_table.heading('SaleID', text='saleID')
+    sale_table.heading('EmployeeID', text='EmployeeID')
+    sale_table.heading('SaleDate', text='saleDate')
+    sale_table.heading('TotalSalesAmount', text='TotalSalesAmount')
 
-    sale_table.column('saleID', width=20, anchor=CENTER)
+    sale_table.column('SaleID', width=20, anchor=CENTER)
     sale_table.column('EmployeeID', width=60, anchor=CENTER)
-    sale_table.column('saleDate', width=60, anchor=CENTER)
-    sale_table.column('TotalAmount', width=60, anchor=CENTER)
+    sale_table.column('SaleDate', width=60, anchor=CENTER)
+    sale_table.column('TotalSalesAmount', width=60, anchor=CENTER)
 
     style = ttk.Style()
     style.configure('Treeview', rowheight=40, font=('Helvetica', 10), foreground='black', background='white', fieldbackground='white')
