@@ -716,7 +716,7 @@ show_inventory_button = ttk.Button(leftFrame, text='Show Inventory', width=25, s
 show_inventory_button.grid(row=8, column=1, padx=10, pady=0)
 
 show_supplier_button = ttk.Button(leftFrame, text='Show supplier', width=25, state=DISABLED, command=lambda: supplier.open_supplier_window(root, mycursor))
-show_supplier_button.grid(row=9, column=2, padx=10, pady=0)
+show_supplier_button.grid(row=9, column=1, padx=10, pady=0)
 
 show_transaction_button = ttk.Button(leftFrame, text='Show transaction', width=25, state=DISABLED, command=lambda: transaction.open_transaction_window(root, mycursor))
 show_transaction_button.grid(row=10, column=2, padx=10, pady=0)
