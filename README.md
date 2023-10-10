@@ -1,1 +1,1 @@
-# DBMS-MiniProjectss
+# DBMS-Coursework
