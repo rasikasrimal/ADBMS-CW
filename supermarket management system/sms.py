@@ -278,7 +278,7 @@ def show_orderdetail():
         orderdetail_table.insert('',END,values=data_list)
 
 def show_employee():
-    query='SELECT * FROM orders'
+    query='SELECT * FROM employees'
     mycursor.execute(query)
     fetched_data=mycursor.fetchall()
     employee_table.delete(*employee_table.get_children())
