@@ -582,7 +582,7 @@ def add_customer():
                 )
             )
             con.commit()
-            result=messagebox.askyesno('Confirm','Success', 'Do you want to clear the form?')
+            result=messagebox.askyesno('Confirm','Do you want to clear the form?')
             if result:
                 idEntry.delete(0, END)
                 firstnameEntry.delete(0, END)
@@ -592,7 +592,8 @@ def add_customer():
                 addressEntry.delete(0, END)
                 registrationdateEntry.delete(0, END)
                 loyaltypointsEntry.delete(0, END)
-            show_customer()
+            else:
+                pass
 
 
 
@@ -643,50 +644,6 @@ def add_customer():
     add_customer_button = ttk.Button(add_window, text="Add Customer", command=add_customer_data)
     add_customer_button.grid(row=8, columnspan =2, pady=10)
 
-
-
-    # if (
-    #     customerIDEntry.get() == '' or
-    #     firstNameEntry.get() == '' or
-    #     lastNameEntry.get() == '' or
-    #     emailEntry.get() == '' or
-    #     phoneEntry.get() == '' or
-    #     addressEntry.get() == ''
-    # ):
-    #     messagebox.showerror('Error', 'All fields are required', parent=screen)
-    # else:
-    #     query = 'INSERT INTO customers (CustomerID, FirstName, LastName, Email, Phone, Address, LoyaltyPoints) VALUES (%s, %s, %s, %s, %s, %s, %s)'
-    #     try:
-    #         mycursor.execute(query, (
-    #             customerIDEntry.get(),
-    #             firstNameEntry.get(),
-    #             lastNameEntry.get(),
-    #             emailEntry.get(),
-    #             phoneEntry.get(),
-    #             addressEntry.get(),
-    #             0  # Assuming initial loyalty points are 0
-    #         ))
-    #         con.commit()
-    #         result = messagebox.askyesnocancel('Success', 'Do you want to clear the form?')
-    #         if result:
-    #             customerIDEntry.delete(0, END)
-    #             firstNameEntry.delete(0, END)
-    #             lastNameEntry.delete(0, END)
-    #             emailEntry.delete(0, END)
-    #             phoneEntry.delete(0, END)
-    #             addressEntry.delete(0, END)
-    #     except Exception as e:
-    #         print(f"Error: {e}")
-    #         messagebox.showerror('Error', 'This CustomerID is already taken', parent=screen)
-    #         return
-
-    #     query = 'SELECT * FROM customers'
-    #     mycursor.execute(query)
-    #     fetched_data = mycursor.fetchall()
-    #     customer_table.delete(*customer_table.get_children())
-    #     for data in fetched_data:
-    #         data_list = list(data)
-    #         customer_table.insert('', END, values=data_list)
 
 #################################################################################################
 
