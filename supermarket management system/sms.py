@@ -12,7 +12,6 @@ import delete_operations as delete_ops
 import customer
 import product
 import order
-
 import orderdetail
 import employee
 import sale
@@ -24,6 +23,10 @@ import transaction
 import storelocation
 import visits
 import customers_
+
+import add_student
+
+import add_customer_top
 
 
 
@@ -154,85 +157,194 @@ def export_data():
     messagebox.showeinfo('Success', 'Data Exported Successfully')
 
 
-def toplevel_date(title, button_text, command):
-    global idEntry, mobileEntry, nameEntry, emailEntry, addressEntry, genderEntry, dobEntry, screen
-    screen = Toplevel()
-    screen.grab_set()
-    screen.title('Update Student')
-    screen.resizable(False, False)
-    idlable = Label(screen, text='ID', font=('Helvetica', 15, 'bold'))
-    idlable.grid(row=0, column=0, padx=10, pady=10, sticky='w')
-    idEntry = Entry(screen, font=('Helvetica', 15, 'bold'), width=24)
-    idEntry.grid(row=0, column=1, padx=10, pady=10)
+# def toplevel_date(title, button_text, command):
+#     global idEntry, mobileEntry, nameEntry, emailEntry, addressEntry, genderEntry, dobEntry, screen
+#     screen = Toplevel()
+#     screen.grab_set()
+#     screen.title('Update Student')
+#     screen.resizable(False, False)
+#     idlable = Label(screen, text='ID', font=('Helvetica', 15, 'bold'))
+#     idlable.grid(row=0, column=0, padx=10, pady=10, sticky='w')
+#     idEntry = Entry(screen, font=('Helvetica', 15, 'bold'), width=24)
+#     idEntry.grid(row=0, column=1, padx=10, pady=10)
 
-    namelable = Label(screen, text='Name', font=('Helvetica', 15, 'bold'))
-    namelable.grid(row=1, column=0, padx=10, pady=10, sticky='w')
-    nameEntry = Entry(screen, font=('Helvetica', 15, 'bold'), width=24)
-    nameEntry.grid(row=1, column=1, padx=10, pady=10)
+#     namelable = Label(screen, text='Name', font=('Helvetica', 15, 'bold'))
+#     namelable.grid(row=1, column=0, padx=10, pady=10, sticky='w')
+#     nameEntry = Entry(screen, font=('Helvetica', 15, 'bold'), width=24)
+#     nameEntry.grid(row=1, column=1, padx=10, pady=10)
 
-    mobilelable = Label(screen, text='Mobile', font=('Helvetica', 15, 'bold'))
-    mobilelable.grid(row=2, column=0, padx=10, pady=10, sticky='w')
-    mobileEntry = Entry(screen, font=('Helvetica', 15, 'bold'), width=24)
-    mobileEntry.grid(row=2, column=1, padx=10, pady=10)
+#     mobilelable = Label(screen, text='Mobile', font=('Helvetica', 15, 'bold'))
+#     mobilelable.grid(row=2, column=0, padx=10, pady=10, sticky='w')
+#     mobileEntry = Entry(screen, font=('Helvetica', 15, 'bold'), width=24)
+#     mobileEntry.grid(row=2, column=1, padx=10, pady=10)
 
-    emaillable = Label(screen, text='Email', font=('Helvetica', 15, 'bold'))
-    emaillable.grid(row=3, column=0, padx=10, pady=10, sticky='w')
-    emailEntry = Entry(screen, font=('Helvetica', 15, 'bold'), width=24)
-    emailEntry.grid(row=3, column=1, padx=10, pady=10)
+#     emaillable = Label(screen, text='Email', font=('Helvetica', 15, 'bold'))
+#     emaillable.grid(row=3, column=0, padx=10, pady=10, sticky='w')
+#     emailEntry = Entry(screen, font=('Helvetica', 15, 'bold'), width=24)
+#     emailEntry.grid(row=3, column=1, padx=10, pady=10)
 
-    addresslable = Label(screen, text='Address', font=('Helvetica', 15, 'bold'))
-    addresslable.grid(row=4, column=0, padx=10, pady=10, sticky='w')
-    addressEntry = Entry(screen, font=('Helvetica', 15, 'bold'), width=24)
-    addressEntry.grid(row=4, column=1, padx=10, pady=10)
+#     addresslable = Label(screen, text='Address', font=('Helvetica', 15, 'bold'))
+#     addresslable.grid(row=4, column=0, padx=10, pady=10, sticky='w')
+#     addressEntry = Entry(screen, font=('Helvetica', 15, 'bold'), width=24)
+#     addressEntry.grid(row=4, column=1, padx=10, pady=10)
 
-    genderlable = Label(screen, text='Gender', font=('Helvetica', 15, 'bold'))
-    genderlable.grid(row=5, column=0, padx=10, pady=10, sticky='w')
-    genderEntry = Entry(screen, font=('Helvetica', 15, 'bold'), width=24)
-    genderEntry.grid(row=5, column=1, padx=10, pady=10)
+#     genderlable = Label(screen, text='Gender', font=('Helvetica', 15, 'bold'))
+#     genderlable.grid(row=5, column=0, padx=10, pady=10, sticky='w')
+#     genderEntry = Entry(screen, font=('Helvetica', 15, 'bold'), width=24)
+#     genderEntry.grid(row=5, column=1, padx=10, pady=10)
 
-    doblable = Label(screen, text='DOB', font=('Helvetica', 15, 'bold'))
-    doblable.grid(row=6, column=0, padx=10, pady=10, sticky='w')
-    dobEntry = Entry(screen, font=('Helvetica', 15, 'bold'), width=24)
-    dobEntry.grid(row=6, column=1, padx=10, pady=10)
+#     doblable = Label(screen, text='DOB', font=('Helvetica', 15, 'bold'))
+#     doblable.grid(row=6, column=0, padx=10, pady=10, sticky='w')
+#     dobEntry = Entry(screen, font=('Helvetica', 15, 'bold'), width=24)
+#     dobEntry.grid(row=6, column=1, padx=10, pady=10)
 
-    student_button = ttk.Button(screen, text=button_text, width=25, command=command)
-    student_button.grid(row=9, columnspan=2, padx=10, pady=10)
+#     student_button = ttk.Button(screen, text=button_text, width=25, command=command)
+#     student_button.grid(row=9, columnspan=2, padx=10, pady=10)
 
-    if title == 'Update Student':
-        indexing=student_table.focus()
+#     if title == 'Update Student':
+#         indexing=student_table.focus()
 
-        content=student_table.item(indexing)
-        listdata=content['values']
-        idEntry.insert(0,listdata[0])
-        nameEntry.insert(0,listdata[1])
-        mobileEntry.insert(0,listdata[2])
-        emailEntry.insert(0,listdata[3])
-        addressEntry.insert(0,listdata[4])
-        genderEntry.insert(0,listdata[5])
-        dobEntry.insert(0,listdata[6])
+#         content=student_table.item(indexing)
+#         listdata=content['values']
+#         idEntry.insert(0,listdata[0])
+#         nameEntry.insert(0,listdata[1])
+#         mobileEntry.insert(0,listdata[2])
+#         emailEntry.insert(0,listdata[3])
+#         addressEntry.insert(0,listdata[4])
+#         genderEntry.insert(0,listdata[5])
+#         dobEntry.insert(0,listdata[6])
 
 
-def update_data():
-    global currentdate, currenttime
-    currentdate = time.strftime('%d:%m:%Y')
-    currenttime = time.strftime('%H:%M:%S')
 
-    query = 'update student set name=%s, mobile=%s, email=%s, address=%s, gender=%s, dob=%s, date=%s, time=%s where id=%s'
-    mycursor.execute(query, (
-        nameEntry.get(),
-        mobileEntry.get(),
-        emailEntry.get(),
-        addressEntry.get(),
-        genderEntry.get(),
-        dobEntry.get(),
-        currentdate,
-        currenttime,
-        idEntry.get()
-    ))
-    con.commit()
-    messagebox.showinfo('Success', 'Student Updated Successfully', parent=screen)
-    screen.destroy()
-    show_student()
+
+
+
+# def customer_data(title, button_text, command):
+
+#     def add_customer_data():
+#         if (
+#             idEntry.get() == '' or
+#             firstnameEntry.get() == '' or
+#             lastnameEntry.get() == '' or
+#             emailEntry.get() == '' or
+#             phoneEntry.get() == '' or
+#             addressEntry.get() == '' or
+#             registrationdateEntry.get() == '' or
+#             loyaltypointsEntry.get() == ''):
+#             messagebox.showerror('Error', 'All fields are required', parent=screen)
+#     add_window = Toplevel()
+#     add_window.grab_set()
+#     add_window.resizable(False, False)
+            
+
+
+#     global idEntry, firstnameEntry, lastnameEntry, emailEntry, phoneEntry, addressEntry, registrationdateEntry, loyaltypointsEntry, screen
+#     screen = Toplevel()
+#     screen.grab_set()
+#     screen.title('Update Customer')
+#     screen.resizable(False, False)
+
+#     idlable = Label(screen, text='customerID', font=('Helvetica', 15, 'bold'))
+#     idlable.grid(row=0, column=0, padx=10, pady=10, sticky='w')
+#     idEntry = Entry(screen, font=('Helvetica', 15, 'bold'), width=24)
+#     idEntry.grid(row=0, column=1, padx=10, pady=10)
+
+#     firstnamelable = Label(screen, text='first Name', font=('Helvetica', 15, 'bold'))
+#     firstnamelable.grid(row=1, column=0, padx=10, pady=10, sticky='w')
+#     firstnameEntry = Entry(screen, font=('Helvetica', 15, 'bold'), width=24)
+#     firstnameEntry.grid(row=1, column=1, padx=10, pady=10)
+
+#     lastnamelable = Label(screen, text='last Name', font=('Helvetica', 15, 'bold'))
+#     lastnamelable.grid(row=1, column=0, padx=10, pady=10, sticky='w')
+#     lastnameEntry = Entry(screen, font=('Helvetica', 15, 'bold'), width=24)
+#     lastnameEntry.grid(row=1, column=1, padx=10, pady=10)
+
+#     emaillable = Label(screen, text='Email', font=('Helvetica', 15, 'bold'))
+#     emaillable.grid(row=3, column=0, padx=10, pady=10, sticky='w')
+#     emailEntry = Entry(screen, font=('Helvetica', 15, 'bold'), width=24)
+#     emailEntry.grid(row=3, column=1, padx=10, pady=10)
+
+#     phonelable = Label(screen, text='phone', font=('Helvetica', 15, 'bold'))
+#     phonelable.grid(row=2, column=0, padx=10, pady=10, sticky='w')
+#     phoneEntry = Entry(screen, font=('Helvetica', 15, 'bold'), width=24)
+#     phoneEntry.grid(row=2, column=1, padx=10, pady=10)
+
+#     addresslable = Label(screen, text='Address', font=('Helvetica', 15, 'bold'))
+#     addresslable.grid(row=4, column=0, padx=10, pady=10, sticky='w')
+#     addressEntry = Entry(screen, font=('Helvetica', 15, 'bold'), width=24)
+#     addressEntry.grid(row=4, column=1, padx=10, pady=10)
+
+#     registrationdatelable = Label(screen, text='registrationdate', font=('Helvetica', 15, 'bold'))
+#     registrationdatelable.grid(row=5, column=0, padx=10, pady=10, sticky='w')
+#     registrationdateEntry = Entry(screen, font=('Helvetica', 15, 'bold'), width=24)
+#     registrationdateEntry.grid(row=5, column=1, padx=10, pady=10)
+
+#     loyaltypointslable = Label(screen, text='loyaltypoints', font=('Helvetica', 15, 'bold'))
+#     loyaltypointslable.grid(row=6, column=0, padx=10, pady=10, sticky='w')
+#     loyaltypointsEntry = Entry(screen, font=('Helvetica', 15, 'bold'), width=24)
+#     loyaltypointsEntry.grid(row=6, column=1, padx=10, pady=10)
+
+#     add_customer_button = ttk.Button(screen, text=button_text, width=25, command=command)
+#     add_customer_button.grid(row=9, columnspan=2, padx=10, pady=10)
+
+#     if title == 'Update customer':
+#         indexing = customer_table.focus()
+
+#         content = customer_table.item(indexing)
+#         listdata = content['values']
+
+#         idEntry.insert(0, listdata[0])
+#         firstnameEntry.insert(0, listdata[1])
+#         lastnameEntry.insert(0, listdata[2])
+#         emailEntry.insert(0, listdata[3])
+#         phoneEntry.insert(0, listdata[4])
+#         addressEntry.insert(0, listdata[5])  # Correct index for Address
+#         registrationdateEntry.insert(0, listdata[6])  # Correct index for Registration Date
+#         loyaltypointsEntry.insert(0, listdata[7])  # Correct index for Loyalty Points
+
+# def update_customer():
+#     global currentdate, currenttime
+#     currentdate = time.strftime('%Y-%m-%d')
+#     currenttime = time.strftime('%H:%M:%S')
+
+#     query = 'UPDATE customers SET FirstName=%s, LastName=%s, Email=%s, Phone=%s, Address=%s, RegistrationDate=%s, LoyaltyPoints=%s WHERE CustomerID=%s'
+#     mycursor.execute(query, (
+#         firstnameEntry.get(),
+#         lastnameEntry.get(),
+#         emailEntry.get(),
+#         phoneEntry.get(),
+#         addressEntry.get(),
+#         registrationdateEntry.get(),
+#         loyaltypointsEntry.get(),
+#         idEntry.get()
+#     ))
+#     con.commit()
+#     messagebox.showinfo('Success', 'Customer Updated Successfully', parent=screen)
+#     screen.destroy()
+#     show_customers()
+
+
+# def update_data():
+#     global currentdate, currenttime
+#     currentdate = time.strftime('%d:%m:%Y')
+#     currenttime = time.strftime('%H:%M:%S')
+
+#     query = 'update customers set name=%s, mobile=%s, email=%s, address=%s, gender=%s, dob=%s, date=%s, time=%s where id=%s'
+#     mycursor.execute(query, (
+#         nameEntry.get(),
+#         mobileEntry.get(),
+#         emailEntry.get(),
+#         addressEntry.get(),
+#         genderEntry.get(),
+#         dobEntry.get(),
+#         currentdate,
+#         currenttime,
+#         idEntry.get()
+#     ))
+#     con.commit()
+#     messagebox.showinfo('Success', 'Student Updated Successfully', parent=screen)
+#     screen.destroy()
+#     show_student()
 
 # def show_student():
 #     query='SELECT * FROM student'
@@ -396,57 +508,185 @@ def show_customer():
 
 #################################################################################################
 
-def add_data():
-    global currentdate, currenttime
-    currentdate = time.strftime('%Y:%m:%d')
-    currenttime = time.strftime('%H:%M:%S')
+# def add_data():
+#     global currentdate, currenttime
+#     currentdate = time.strftime('%Y:%m:%d')
+#     currenttime = time.strftime('%H:%M:%S')
 
-    if (
-        idEntry.get() == '' or
-        nameEntry.get() == '' or
-        mobileEntry.get() == '' or
-        emailEntry.get() == '' or
-        addressEntry.get() == '' or
-        genderEntry.get() == '' or
-        dobEntry.get() == ''
-    ):
-        messagebox.showerror('Error', 'All fields are required', parent=screen)
-    else:
-        query = 'INSERT INTO student VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)'
-        try:
+#     if (
+#         idEntry.get() == '' or
+#         nameEntry.get() == '' or
+#         mobileEntry.get() == '' or
+#         emailEntry.get() == '' or
+#         addressEntry.get() == '' or
+#         genderEntry.get() == '' or
+#         dobEntry.get() == ''
+#     ):
+#         messagebox.showerror('Error', 'All fields are required', parent=screen)
+#     else:
+#         query = 'INSERT INTO student VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)'
+#         try:
+#             mycursor.execute(query, (
+#                 idEntry.get(),
+#                 nameEntry.get(),
+#                 mobileEntry.get(),
+#                 emailEntry.get(),
+#                 addressEntry.get(), 
+#                 genderEntry.get(), 
+#                 dobEntry.get(), 
+#                 currentdate,
+#                 currenttime
+#             ))
+#             con.commit()
+#             result = messagebox.askyesnocancel('Success', 'Do you want to clear the form?')
+#             if result:
+#                 idEntry.delete(0, END)
+#                 nameEntry.delete(0, END)
+#                 mobileEntry.delete(0, END)
+#                 emailEntry.delete(0, END)
+#                 addressEntry.delete(0, END)
+#                 genderEntry.delete(0, END)
+#                 dobEntry.delete(0, END)
+#         except Exception as e:
+#             print(f"Error: {e}")
+#             messagebox.showerror('Error', 'This ID is already taken', parent=screen)
+#             return
+
+#         query = 'SELECT * FROM student'
+#         mycursor.execute(query)
+#         fetched_data = mycursor.fetchall()
+#         student_table.delete(*student_table.get_children())
+#         for data in fetched_data:
+#             data_list = list(data)
+#             student_table.insert('', END, values=data_list)
+def add_customer():
+    def add_customer_data():
+        if idEntry.get() == '' or firstnameEntry.get() == '' or lastnameEntry.get() == '' or emailEntry.get() == '' or phoneEntry.get() == '' or addressEntry.get() == '' or registrationdateEntry.get() == '' or loyaltypointsEntry.get() == '':
+            messagebox.showerror('Error', 'All fields are required', parent=add_window)
+        else:
+            query = '''
+            INSERT INTO customers (
+                CustomerID, FirstName, LastName, 
+                Email, Phone, Address, RegistrationDate, 
+                LoyaltyPoints) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+            '''
             mycursor.execute(query, (
-                idEntry.get(),
-                nameEntry.get(),
-                mobileEntry.get(),
-                emailEntry.get(),
+                idEntry.get(), 
+                firstnameEntry.get(), 
+                lastnameEntry.get(), 
+                emailEntry.get(), 
+                phoneEntry.get(), 
                 addressEntry.get(), 
-                genderEntry.get(), 
-                dobEntry.get(), 
-                currentdate,
-                currenttime
-            ))
+                registrationdateEntry.get(), 
+                loyaltypointsEntry.get()
+                )
+            )
             con.commit()
-            result = messagebox.askyesnocancel('Success', 'Do you want to clear the form?')
+            result=messagebox.askyesno('Confirm','Success', 'Do you want to clear the form?')
             if result:
                 idEntry.delete(0, END)
-                nameEntry.delete(0, END)
-                mobileEntry.delete(0, END)
+                firstnameEntry.delete(0, END)
+                lastnameEntry.delete(0, END)
                 emailEntry.delete(0, END)
+                phoneEntry.delete(0, END)
                 addressEntry.delete(0, END)
-                genderEntry.delete(0, END)
-                dobEntry.delete(0, END)
-        except Exception as e:
-            print(f"Error: {e}")
-            messagebox.showerror('Error', 'This ID is already taken', parent=screen)
-            return
+                registrationdateEntry.delete(0, END)
+                loyaltypointsEntry.delete(0, END)
+            show_customer()
 
-        query = 'SELECT * FROM student'
-        mycursor.execute(query)
-        fetched_data = mycursor.fetchall()
-        student_table.delete(*student_table.get_children())
-        for data in fetched_data:
-            data_list = list(data)
-            student_table.insert('', END, values=data_list)
+
+
+    add_window = Toplevel()
+    add_window.grab_set()
+    add_window.resizable(False, False)
+
+    idlable = Label(add_window, text='customerID', font=('Helvetica', 15, 'bold'))
+    idlable.grid(row=0, column=0, padx=10, pady=10, sticky='w')
+    idEntry = Entry(add_window, font=('Helvetica', 15, 'bold'), width=24)
+    idEntry.grid(row=0, column=1, padx=10, pady=10)
+
+    firstnamelable = Label(add_window, text='first Name', font=('Helvetica', 15, 'bold'))
+    firstnamelable.grid(row=1, column=0, padx=10, pady=10, sticky='w')
+    firstnameEntry = Entry(add_window, font=('Helvetica', 15, 'bold'), width=24)
+    firstnameEntry.grid(row=1, column=1, padx=10, pady=10)
+
+    lastnamelable = Label(add_window, text='last Name', font=('Helvetica', 15, 'bold'))
+    lastnamelable.grid(row=2, column=0, padx=10, pady=10, sticky='w')
+    lastnameEntry = Entry(add_window, font=('Helvetica', 15, 'bold'), width=24)
+    lastnameEntry.grid(row=2, column=1, padx=10, pady=10)
+
+    emaillable = Label(add_window, text='Email', font=('Helvetica', 15, 'bold'))
+    emaillable.grid(row=3, column=0, padx=10, pady=10, sticky='w')
+    emailEntry = Entry(add_window, font=('Helvetica', 15, 'bold'), width=24)
+    emailEntry.grid(row=3, column=1, padx=10, pady=10)
+
+    phonelable = Label(add_window, text='phone', font=('Helvetica', 15, 'bold'))
+    phonelable.grid(row=4, column=0, padx=10, pady=10, sticky='w')
+    phoneEntry = Entry(add_window, font=('Helvetica', 15, 'bold'), width=24)
+    phoneEntry.grid(row=4, column=1, padx=10, pady=10)
+
+    addresslable = Label(add_window, text='Address', font=('Helvetica', 15, 'bold'))
+    addresslable.grid(row=5, column=0, padx=10, pady=10, sticky='w')
+    addressEntry = Entry(add_window, font=('Helvetica', 15, 'bold'), width=24)
+    addressEntry.grid(row=5, column=1, padx=10, pady=10)
+
+    registrationdatelable = Label(add_window, text='registrationdate', font=('Helvetica', 15, 'bold'))
+    registrationdatelable.grid(row=6, column=0, padx=10, pady=10, sticky='w')
+    registrationdateEntry = Entry(add_window, font=('Helvetica', 15, 'bold'), width=24)
+    registrationdateEntry.grid(row=6, column=1, padx=10, pady=10)
+
+    loyaltypointslable = Label(add_window, text='loyaltypoints', font=('Helvetica', 15, 'bold'))
+    loyaltypointslable.grid(row=7, column=0, padx=10, pady=10, sticky='w')
+    loyaltypointsEntry = Entry(add_window, font=('Helvetica', 15, 'bold'), width=24)
+    loyaltypointsEntry.grid(row=7, column=1, padx=10, pady=10)
+
+    add_customer_button = ttk.Button(add_window, text="Add Customer", command=add_customer_data)
+    add_customer_button.grid(row=8, columnspan =2, pady=10)
+
+
+
+    # if (
+    #     customerIDEntry.get() == '' or
+    #     firstNameEntry.get() == '' or
+    #     lastNameEntry.get() == '' or
+    #     emailEntry.get() == '' or
+    #     phoneEntry.get() == '' or
+    #     addressEntry.get() == ''
+    # ):
+    #     messagebox.showerror('Error', 'All fields are required', parent=screen)
+    # else:
+    #     query = 'INSERT INTO customers (CustomerID, FirstName, LastName, Email, Phone, Address, LoyaltyPoints) VALUES (%s, %s, %s, %s, %s, %s, %s)'
+    #     try:
+    #         mycursor.execute(query, (
+    #             customerIDEntry.get(),
+    #             firstNameEntry.get(),
+    #             lastNameEntry.get(),
+    #             emailEntry.get(),
+    #             phoneEntry.get(),
+    #             addressEntry.get(),
+    #             0  # Assuming initial loyalty points are 0
+    #         ))
+    #         con.commit()
+    #         result = messagebox.askyesnocancel('Success', 'Do you want to clear the form?')
+    #         if result:
+    #             customerIDEntry.delete(0, END)
+    #             firstNameEntry.delete(0, END)
+    #             lastNameEntry.delete(0, END)
+    #             emailEntry.delete(0, END)
+    #             phoneEntry.delete(0, END)
+    #             addressEntry.delete(0, END)
+    #     except Exception as e:
+    #         print(f"Error: {e}")
+    #         messagebox.showerror('Error', 'This CustomerID is already taken', parent=screen)
+    #         return
+
+    #     query = 'SELECT * FROM customers'
+    #     mycursor.execute(query)
+    #     fetched_data = mycursor.fetchall()
+    #     customer_table.delete(*customer_table.get_children())
+    #     for data in fetched_data:
+    #         data_list = list(data)
+    #         customer_table.insert('', END, values=data_list)
 
 #################################################################################################
 
@@ -607,16 +847,31 @@ def connect_database():
 
         messagebox.showinfo('Success', 'Connected to Database')
         connectWindow.destroy()
-        addstudentButton.config(state=NORMAL)
+
+        addcustomerButton.config(state=NORMAL)
+
+        # addstudentButton.config(state=NORMAL)
+        # addstudentButton.config(state=NORMAL)
+        # addstudentButton.config(state=NORMAL)
+        # addstudentButton.config(state=NORMAL)
+        # addstudentButton.config(state=NORMAL)
+        # addstudentButton.config(state=NORMAL)
+        # addstudentButton.config(state=NORMAL)
+        # addstudentButton.config(state=NORMAL)
+        # addstudentButton.config(state=NORMAL)
+        # addstudentButton.config(state=NORMAL)
+        # addstudentButton.config(state=NORMAL)
+        # addstudentButton.config(state=NORMAL)
+
         # searchstudentButton.config(state=NORMAL)
-        updatestudentButton.config(state=NORMAL)
-        showstudentButton.config(state=NORMAL)
+        # updatestudentButton.config(state=NORMAL)
+        # showstudentButton.config(state=NORMAL)
         # exportDataButton.config(state=NORMAL)
         # deletestudentButton.config(state=NORMAL)
+
         show_customer_button.config(state=NORMAL)
         show_product_button.config(state=NORMAL)
         show_order_button.config(state=NORMAL)
-
         show_orderdetail_button.config(state=NORMAL)
         show_employee_button.config(state=NORMAL)
         show_sale_button.config(state=NORMAL)
@@ -628,6 +883,21 @@ def connect_database():
         show_storelocation_button.config(state=NORMAL)
         show_visit_button.config(state=NORMAL)
         show_customers__button.config(state=NORMAL)
+
+        updatestudentButton.config(state=NORMAL)
+        # updatestudentButton.config(state=NORMAL)
+        # updatestudentButton.config(state=NORMAL)
+        # updatestudentButton.config(state=NORMAL)
+        # updatestudentButton.config(state=NORMAL)
+        # updatestudentButton.config(state=NORMAL)
+        # updatestudentButton.config(state=NORMAL)
+        # updatestudentButton.config(state=NORMAL)
+        # updatestudentButton.config(state=NORMAL)
+        # updatestudentButton.config(state=NORMAL)
+        # updatestudentButton.config(state=NORMAL)
+        # updatestudentButton.config(state=NORMAL)
+        # updatestudentButton.config(state=NORMAL)
+        
 
         # OrderDetails
         # Employees
@@ -671,7 +941,8 @@ def connect_database():
 # GUI Part
 root = ttkthemes.ThemedTk()
 root.get_themes()
-root.set_theme('radiance')
+# root.set_theme('radiance')
+root.set_theme('breeze')
 
 root.geometry('1174x680+0+0')
 root.resizable(True, True)
@@ -686,24 +957,64 @@ root.title('DBMS For Supermarket')
 # sliderLabel.place(x=200, y=0)
 # slider() # Start the animation
 
-s = 'DBMS For Supermarket'
+s = 'Supermarket DBMS'
 sliderLabel = Label(root, text=s, font=('Helvetica', 30, 'bold'), width=30, fg='black', anchor='w')
 sliderLabel.place(x=5, y=5)
 
-connectButton = ttk.Button(root, text='Connect Database', command=connect_database)
-connectButton.place(x=980, y=0)
+connectButton = ttk.Button(root, text='Connect Database', width=25, command=connect_database)
+connectButton.place(x=873, y=0)
+
+exitButton = ttk.Button(root, text='Exit', width=25, command=lambda: exit_ops.handle_exit(root))
+exitButton.place(x=873, y=30)
 
 #####################################################
 leftFrame = Frame(root, relief=RIDGE, border=2)
-leftFrame.place(x=10, y=70, width=800, height=534)
+leftFrame.place(x=10, y=70, width=1100, height=534)
 ######################################################
 
-logo_image = PhotoImage(file='images/student2.png')
-logo_label = Label(leftFrame, image=logo_image)
-logo_label.grid(row=0, column=0, padx=10, pady=10)
+# logo_image = PhotoImage(file='images/student2.png')
+# logo_label = Label(leftFrame, image=logo_image)
+# logo_label.grid(row=0, column=0, padx=10, pady=10)
 
-addstudentButton = ttk.Button(leftFrame, text='Add Student', width=25, state=DISABLED, command=lambda: toplevel_date('Add Student', 'Add Student', add_data))
-addstudentButton.grid(row=1, column=0, padx=10, pady=0)
+addcustomerButton = ttk.Button(leftFrame, text='Add customer', width=25, state=DISABLED, command=add_customer)
+addcustomerButton.grid(row=0, column=0, padx=10, pady=0)
+
+addproductButton = ttk.Button(leftFrame, text='Add product', width=25, state=DISABLED, command=lambda: toplevel_date('Add Products', 'Add Products', add_products))
+addproductButton.grid(row=1, column=0, padx=10, pady=0)
+
+addorderButton = ttk.Button(leftFrame, text='Add order', width=25, state=DISABLED, command=lambda: toplevel_date('Add Student', 'Add Student', add_data))
+addorderButton.grid(row=2, column=0, padx=10, pady=0)
+
+addemployeeButton = ttk.Button(leftFrame, text='Add employee', width=25, state=DISABLED, command=lambda: toplevel_date('Add Student', 'Add Student', add_data))
+addemployeeButton.grid(row=3, column=0, padx=10, pady=0)
+
+addorderdetailButton = ttk.Button(leftFrame, text='Add orderdetail', width=25, state=DISABLED, command=lambda: toplevel_date('Add Student', 'Add Student', add_data))
+addorderdetailButton.grid(row=4, column=0, padx=10, pady=0)
+
+addsalesButton = ttk.Button(leftFrame, text='Add Sales', width=25, state=DISABLED, command=lambda: toplevel_date('Add Student', 'Add Student', add_data))
+addsalesButton.grid(row=5, column=0, padx=10, pady=0)
+
+addpromotionButton = ttk.Button(leftFrame, text='Add promotion', width=25, state=DISABLED, command=lambda: toplevel_date('Add Student', 'Add Student', add_data))
+addpromotionButton.grid(row=6, column=0, padx=10, pady=0)
+
+addpromotionusageButton = ttk.Button(leftFrame, text='Add promotionusage', width=25, state=DISABLED, command=lambda: toplevel_date('Add Student', 'Add Student', add_data))
+addpromotionusageButton.grid(row=7, column=0, padx=10, pady=0)
+
+addinventoryButton = ttk.Button(leftFrame, text='Add inventory', width=25, state=DISABLED, command=lambda: toplevel_date('Add Student', 'Add Student', add_data))
+addinventoryButton.grid(row=8, column=0, padx=10, pady=0)
+
+addsupplierButton = ttk.Button(leftFrame, text='Add Supplier', width=25, state=DISABLED, command=lambda: toplevel_date('Add Student', 'Add Student', add_data))
+addsupplierButton.grid(row=9, column=0, padx=10, pady=0)
+
+addtransactionButton = ttk.Button(leftFrame, text='Add transaction', width=25, state=DISABLED, command=lambda: toplevel_date('Add Student', 'Add Student', add_data))
+addtransactionButton.grid(row=10, column=0, padx=10, pady=0)
+
+addstorelocationButton = ttk.Button(leftFrame, text='Add Storelocation', width=25, state=DISABLED, command=lambda: toplevel_date('Add Student', 'Add Student', add_data))
+addstorelocationButton.grid(row=11, column=0, padx=10, pady=0)
+
+addvisitButton = ttk.Button(leftFrame, text='Add visit', width=25, state=DISABLED, command=lambda: toplevel_date('Add Student', 'Add Student', add_data))
+addvisitButton.grid(row=12, column=0, padx=10, pady=0)
+
 
 # searchstudentButton = ttk.Button(leftFrame, text='Search Student', width=25, state=DISABLED, command=lambda: toplevel_date('Search Student', 'Search Student', search_data))
 # searchstudentButton.grid(row=2, column=0, padx=10, pady=0)
@@ -711,29 +1022,26 @@ addstudentButton.grid(row=1, column=0, padx=10, pady=0)
 # deletestudentButton = ttk.Button(leftFrame, text='Delete Student', width=25, state=DISABLED, command=lambda: delete_ops.delete_student(mycursor, con, student_table))
 # deletestudentButton.grid(row=3, column=0, padx=10, pady=0)
 
-updatestudentButton = ttk.Button(leftFrame, text='Update Student', width=25, state=DISABLED, command=lambda: toplevel_date('Update Student', 'Update Student', update_data))
-updatestudentButton.grid(row=4, column=0, padx=10, pady=0)
-
-showstudentButton = ttk.Button(leftFrame, text='Show Customer OLD', width=25, state=DISABLED, command=show_customer)
-showstudentButton.grid(row=5, column=0, padx=10, pady=0)
+# showstudentButton = ttk.Button(leftFrame, text='Show Customer OLD', width=25, state=DISABLED, command=show_customer)
+# showstudentButton.grid(row=5, column=0, padx=10, pady=0)
 
 # exportDataButton = ttk.Button(leftFrame, text='Export Data', width=25, state=DISABLED, command=lambda: export_ops.export_data(student_table))
 # exportDataButton.grid(row=6, column=0, padx=10, pady=0)
 
-exitButton = ttk.Button(leftFrame, text='Exit', width=25, command=lambda: exit_ops.handle_exit(root))
-exitButton.grid(row=7, column=0, padx=10, pady=0)
+# exitButton = ttk.Button(leftFrame, text='Exit', width=25, command=lambda: exit_ops.handle_exit(root))
+# exitButton.grid(row=7, column=0, padx=10, pady=0)
 
 #################################################################################################
-show_customer_button = ttk.Button(leftFrame, text='Show Customers', width=25, state=DISABLED, command=lambda: customer.open_customer_window(root, mycursor))
+show_customer_button = ttk.Button(leftFrame, text='Customers', width=25, state=DISABLED, command=lambda: customer.open_customer_window(root, mycursor))
 show_customer_button.grid(row=0, column=1, padx=10, pady=0)
 
-show_product_button = ttk.Button(leftFrame, text='Show Products', width=25, state=DISABLED, command=lambda: product.open_product_window(root, mycursor))
+show_product_button = ttk.Button(leftFrame, text='Products', width=25, state=DISABLED, command=lambda: product.open_product_window(root, mycursor))
 show_product_button.grid(row=1, column=1, padx=10, pady=0)
 
-show_order_button = ttk.Button(leftFrame, text='Show Order', width=25, state=DISABLED, command=lambda: order.open_order_window(root, mycursor))
+show_order_button = ttk.Button(leftFrame, text='Order', width=25, state=DISABLED, command=lambda: order.open_order_window(root, mycursor))
 show_order_button.grid(row=2, column=1, padx=10, pady=0)
 
-show_employee_button = ttk.Button(leftFrame, text='Show Employee', width=25, state=DISABLED, command=lambda: employee.open_employee_window(root, mycursor))
+show_employee_button = ttk.Button(leftFrame, text='Employee', width=25, state=DISABLED, command=lambda: employee.open_employee_window(root, mycursor))
 show_employee_button.grid(row=3, column=1, padx=10, pady=0)
 
 show_orderdetail_button = ttk.Button(leftFrame, text='Order Detail', width=25, state=DISABLED, command=lambda: orderdetail.open_orderdetail_window(root, mycursor))
@@ -748,23 +1056,68 @@ show_promotion_button.grid(row=6, column=1, padx=10, pady=0)
 show_promotionusage_button = ttk.Button(leftFrame, text='Promotion Usage', width=25, state=DISABLED, command=lambda: promotionusage.open_promotionusage_window(root, mycursor))
 show_promotionusage_button.grid(row=7, column=1, padx=10, pady=0)
 
-show_inventory_button = ttk.Button(leftFrame, text='Show Inventory', width=25, state=DISABLED, command=lambda: inventory.open_inventory_window(root, mycursor))
+show_inventory_button = ttk.Button(leftFrame, text='Inventory', width=25, state=DISABLED, command=lambda: inventory.open_inventory_window(root, mycursor))
 show_inventory_button.grid(row=8, column=1, padx=10, pady=0)
 
-show_supplier_button = ttk.Button(leftFrame, text='Show supplier', width=25, state=DISABLED, command=lambda: supplier.open_supplier_window(root, mycursor))
+show_supplier_button = ttk.Button(leftFrame, text='Supplier', width=25, state=DISABLED, command=lambda: supplier.open_supplier_window(root, mycursor))
 show_supplier_button.grid(row=9, column=1, padx=10, pady=0)
 
-show_transaction_button = ttk.Button(leftFrame, text='Show transaction', width=25, state=DISABLED, command=lambda: transaction.open_transaction_window(root, mycursor))
+show_transaction_button = ttk.Button(leftFrame, text='Transaction', width=25, state=DISABLED, command=lambda: transaction.open_transaction_window(root, mycursor))
 show_transaction_button.grid(row=10, column=1, padx=10, pady=0)
 
-show_storelocation_button = ttk.Button(leftFrame, text='Show storelocation', width=25, state=DISABLED, command=lambda: storelocation.open_storelocation_window(root, mycursor))
+show_storelocation_button = ttk.Button(leftFrame, text='Storelocation', width=25, state=DISABLED, command=lambda: storelocation.open_storelocation_window(root, mycursor))
 show_storelocation_button.grid(row=11, column=1, padx=10, pady=0)
 
 show_visit_button = ttk.Button(leftFrame, text='Visits', width=25, state=DISABLED, command=lambda: visits.open_visit_window(root, mycursor))
-show_visit_button.grid(row=1, column=2, padx=10, pady=0)
+show_visit_button.grid(row=12, column=1, padx=10, pady=0)
 
-show_customers__button = ttk.Button(leftFrame, text='customers_', width=25, state=DISABLED, command=lambda: customers_.open_customers__window(root, mycursor))
-show_customers__button.grid(row=2, column=2, padx=10, pady=0)
+#################################################################################################
+
+updatestudentButton = ttk.Button(leftFrame, text='Update Student', width=25, state=DISABLED, command=lambda: toplevel_date('Update Student', 'Update Student', update_data))
+updatestudentButton.grid(row=0, column=2, padx=10, pady=0)
+
+updatestudentButton = ttk.Button(leftFrame, text='Update Student', width=25, state=DISABLED, command=lambda: toplevel_date('Update Student', 'Update Student', update_data))
+updatestudentButton.grid(row=1, column=2, padx=10, pady=0)
+
+updatestudentButton = ttk.Button(leftFrame, text='Update Student', width=25, state=DISABLED, command=lambda: toplevel_date('Update Student', 'Update Student', update_data))
+updatestudentButton.grid(row=2, column=2, padx=10, pady=0)
+
+updatestudentButton = ttk.Button(leftFrame, text='Update Student', width=25, state=DISABLED, command=lambda: toplevel_date('Update Student', 'Update Student', update_data))
+updatestudentButton.grid(row=3, column=2, padx=10, pady=0)
+
+updatestudentButton = ttk.Button(leftFrame, text='Update Student', width=25, state=DISABLED, command=lambda: toplevel_date('Update Student', 'Update Student', update_data))
+updatestudentButton.grid(row=4, column=2, padx=10, pady=0)
+
+updatestudentButton = ttk.Button(leftFrame, text='Update Student', width=25, state=DISABLED, command=lambda: toplevel_date('Update Student', 'Update Student', update_data))
+updatestudentButton.grid(row=5, column=2, padx=10, pady=0)
+
+updatestudentButton = ttk.Button(leftFrame, text='Update Student', width=25, state=DISABLED, command=lambda: toplevel_date('Update Student', 'Update Student', update_data))
+updatestudentButton.grid(row=6, column=2, padx=10, pady=0)
+
+updatestudentButton = ttk.Button(leftFrame, text='Update Student', width=25, state=DISABLED, command=lambda: toplevel_date('Update Student', 'Update Student', update_data))
+updatestudentButton.grid(row=7, column=2, padx=10, pady=0)
+
+updatestudentButton = ttk.Button(leftFrame, text='Update Student', width=25, state=DISABLED, command=lambda: toplevel_date('Update Student', 'Update Student', update_data))
+updatestudentButton.grid(row=8, column=2, padx=10, pady=0)
+
+updatestudentButton = ttk.Button(leftFrame, text='Update Student', width=25, state=DISABLED, command=lambda: toplevel_date('Update Student', 'Update Student', update_data))
+updatestudentButton.grid(row=9, column=2, padx=10, pady=0)
+
+updatestudentButton = ttk.Button(leftFrame, text='Update Student', width=25, state=DISABLED, command=lambda: toplevel_date('Update Student', 'Update Student', update_data))
+updatestudentButton.grid(row=10, column=2, padx=10, pady=0)
+
+updatestudentButton = ttk.Button(leftFrame, text='Update Student', width=25, state=DISABLED, command=lambda: toplevel_date('Update Student', 'Update Student', update_data))
+updatestudentButton.grid(row=11, column=2, padx=10, pady=0)
+
+updatestudentButton = ttk.Button(leftFrame, text='Update Student', width=25, state=DISABLED, command=lambda: toplevel_date('Update Student', 'Update Student', update_data))
+updatestudentButton.grid(row=12, column=2, padx=10, pady=0)
+
+
+
+#################################################################################################
+
+show_customers__button = ttk.Button(leftFrame, text='customers_visits_trans', width=25, state=DISABLED, command=lambda: customers_.open_customers__window(root, mycursor))
+show_customers__button.grid(row=0, column=3, padx=10, pady=0)
 
 #################################################################################################
 
