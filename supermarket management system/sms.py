@@ -4,6 +4,8 @@ import ttkthemes
 from tkinter import ttk, messagebox, filedialog
 import pymysql
 import pandas
+import numpy as np
+import matplotlib.pyplot as plt
 
 import exit_operations as exit_ops
 import export_operations as export_ops
