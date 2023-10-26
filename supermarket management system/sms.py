@@ -6,6 +6,8 @@ import pymysql
 import pandas
 import numpy as np
 import matplotlib.pyplot as plt
+import mysql.connector
+
 
 import exit_operations as exit_ops
 import export_operations as export_ops
@@ -561,30 +563,85 @@ def show_customer():
 #         for data in fetched_data:
 #             data_list = list(data)
 #             student_table.insert('', END, values=data_list)
+
+
+# def add_customer():
+#     def add_customer_data():
+#         if idEntry.get() == '' or firstnameEntry.get() == '' or lastnameEntry.get() == '' or emailEntry.get() == '' or phoneEntry.get() == '' or addressEntry.get() == '' or registrationdateEntry.get() == '' or loyaltypointsEntry.get() == '':
+#             messagebox.showerror('Error', 'All fields are required', parent=add_window)
+#         else:
+#             query = '''
+#             INSERT INTO customers (
+#                 CustomerID, FirstName, LastName, 
+#                 Email, Phone, Address, RegistrationDate, 
+#                 LoyaltyPoints) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+#             '''
+#             mycursor.execute(query, (
+#                 idEntry.get(), 
+#                 firstnameEntry.get(), 
+#                 lastnameEntry.get(), 
+#                 emailEntry.get(), 
+#                 phoneEntry.get(), 
+#                 addressEntry.get(), 
+#                 registrationdateEntry.get(), 
+#                 loyaltypointsEntry.get()
+#                 )
+#             )
+#             con.commit()
+#             result=messagebox.askyesno('Confirm','Do you want to clear the form?')
+#             if result:
+#                 idEntry.delete(0, END)
+#                 firstnameEntry.delete(0, END)
+#                 lastnameEntry.delete(0, END)
+#                 emailEntry.delete(0, END)
+#                 phoneEntry.delete(0, END)
+#                 addressEntry.delete(0, END)
+#                 registrationdateEntry.delete(0, END)
+#                 loyaltypointsEntry.delete(0, END)
+#             else:
+#                 pass
 def add_customer():
     def add_customer_data():
-        if idEntry.get() == '' or firstnameEntry.get() == '' or lastnameEntry.get() == '' or emailEntry.get() == '' or phoneEntry.get() == '' or addressEntry.get() == '' or registrationdateEntry.get() == '' or loyaltypointsEntry.get() == '':
+        if (
+            idEntry.get() == '' or 
+            firstnameEntry.get() == '' or 
+            lastnameEntry.get() == '' or 
+            emailEntry.get() == '' or 
+            phoneEntry.get() == '' or 
+            addressEntry.get() == '' or 
+            registrationdateEntry.get() == '' or 
+            loyaltypointsEntry.get() == ''
+        ):
             messagebox.showerror('Error', 'All fields are required', parent=add_window)
         else:
             query = '''
             INSERT INTO customers (
                 CustomerID, FirstName, LastName, 
                 Email, Phone, Address, RegistrationDate, 
-                LoyaltyPoints) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                LoyaltyPoints
+            ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s);
             '''
-            mycursor.execute(query, (
-                idEntry.get(), 
-                firstnameEntry.get(), 
-                lastnameEntry.get(), 
-                emailEntry.get(), 
-                phoneEntry.get(), 
-                addressEntry.get(), 
-                registrationdateEntry.get(), 
+            values = (
+                idEntry.get(),
+                firstnameEntry.get(),
+                lastnameEntry.get(),
+                emailEntry.get(),
+                phoneEntry.get(),
+                addressEntry.get(),
+                registrationdateEntry.get(),
                 loyaltypointsEntry.get()
-                )
             )
+            mycursor.execute(query, values)
+
+            # Insert trigger for customer_details
+            query = '''
+            INSERT INTO customer_details (customer_id, reg_date, loyalty_points)
+            VALUES (%s, NOW(), 0);
+            '''
+            mycursor.execute(query, (idEntry.get(),))  # Pass the customer_id here
+
             con.commit()
-            result=messagebox.askyesno('Confirm','Do you want to clear the form?')
+            result = messagebox.askyesno('Confirm', 'Do you want to clear the form?')
             if result:
                 idEntry.delete(0, END)
                 firstnameEntry.delete(0, END)
@@ -594,8 +651,6 @@ def add_customer():
                 addressEntry.delete(0, END)
                 registrationdateEntry.delete(0, END)
                 loyaltypointsEntry.delete(0, END)
-            else:
-                pass
 
 
 
