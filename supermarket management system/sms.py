@@ -608,18 +608,17 @@ def add_customer():
             lastnameEntry.get() == '' or 
             emailEntry.get() == '' or 
             phoneEntry.get() == '' or 
-            addressEntry.get() == '' or 
-            registrationdateEntry.get() == '' or 
-            loyaltypointsEntry.get() == ''
+            addressEntry.get() == '' # or 
+            # registrationdateEntry.get() == '' or 
+            # loyaltypointsEntry.get() == ''
         ):
             messagebox.showerror('Error', 'All fields are required', parent=add_window)
         else:
             query = '''
             INSERT INTO customers (
-                CustomerID, FirstName, LastName, 
-                Email, Phone, Address, RegistrationDate, 
-                LoyaltyPoints
-            ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s);
+                customer_id, first_name, last_name, 
+                Email, Phone, Address
+            ) VALUES (%s, %s, %s, %s, %s, %s);
             '''
             values = (
                 idEntry.get(),
@@ -627,15 +626,13 @@ def add_customer():
                 lastnameEntry.get(),
                 emailEntry.get(),
                 phoneEntry.get(),
-                addressEntry.get(),
-                registrationdateEntry.get(),
-                loyaltypointsEntry.get()
+                addressEntry.get()
             )
             mycursor.execute(query, values)
 
             # Insert trigger for customer_details
             query = '''
-            INSERT INTO customer_details (customer_id, reg_date, loyalty_points)
+            INSERT INTO customer_details (customer_id, registration_date, loyalty_points)
             VALUES (%s, NOW(), 0);
             '''
             mycursor.execute(query, (idEntry.get(),))  # Pass the customer_id here
@@ -688,15 +685,15 @@ def add_customer():
     addressEntry = Entry(add_window, font=('Helvetica', 15, 'bold'), width=24)
     addressEntry.grid(row=5, column=1, padx=10, pady=10)
 
-    registrationdatelable = Label(add_window, text='registrationdate', font=('Helvetica', 15, 'bold'))
-    registrationdatelable.grid(row=6, column=0, padx=10, pady=10, sticky='w')
-    registrationdateEntry = Entry(add_window, font=('Helvetica', 15, 'bold'), width=24)
-    registrationdateEntry.grid(row=6, column=1, padx=10, pady=10)
+    # registrationdatelable = Label(add_window, text='registrationdate', font=('Helvetica', 15, 'bold'))
+    # registrationdatelable.grid(row=6, column=0, padx=10, pady=10, sticky='w')
+    # registrationdateEntry = Entry(add_window, font=('Helvetica', 15, 'bold'), width=24)
+    # registrationdateEntry.grid(row=6, column=1, padx=10, pady=10)
 
-    loyaltypointslable = Label(add_window, text='loyaltypoints', font=('Helvetica', 15, 'bold'))
-    loyaltypointslable.grid(row=7, column=0, padx=10, pady=10, sticky='w')
-    loyaltypointsEntry = Entry(add_window, font=('Helvetica', 15, 'bold'), width=24)
-    loyaltypointsEntry.grid(row=7, column=1, padx=10, pady=10)
+    # loyaltypointslable = Label(add_window, text='loyaltypoints', font=('Helvetica', 15, 'bold'))
+    # loyaltypointslable.grid(row=7, column=0, padx=10, pady=10, sticky='w')
+    # loyaltypointsEntry = Entry(add_window, font=('Helvetica', 15, 'bold'), width=24)
+    # loyaltypointsEntry.grid(row=7, column=1, padx=10, pady=10)
 
     add_customer_button = ttk.Button(add_window, text="Add Customer", command=add_customer_data)
     add_customer_button.grid(row=8, columnspan =2, pady=10)
@@ -722,138 +719,142 @@ def connect_database():
             messagebox.showinfo('Success', 'Connected to Database')
             return
         try:
-            query = 'CREATE DATABASE IF NOT EXISTS adbms'
+            query = 'CREATE DATABASE IF NOT EXISTS supermarket'
             mycursor.execute(query)
-            query = 'USE adbms'
+            query = 'USE supermarket'
             mycursor.execute(query)
             
             query = ''' 
-            -- Create the Customers table if it doesn't exist
-            CREATE TABLE IF NOT EXISTS Customers (
-                CustomerID INT AUTO_INCREMENT PRIMARY KEY,
-                FirstName VARCHAR(50),
-                LastName VARCHAR(50),
-                Email VARCHAR(255),
-                Phone VARCHAR(15),
-                Address VARCHAR(255),
-                RegistrationDate DATE,
-                LoyaltyPoints INT
+            CREATE TABLE IF NOT EXISTS employee (
+                employee_id INT PRIMARY KEY,
+                first_name VARCHAR(255) NOT NULL,
+                last_name VARCHAR(255) NOT NULL,
+                phone VARCHAR(15) NOT NULL,
+                email VARCHAR(255) UNIQUE NOT NULL,
+                salary DECIMAL(10, 2) NOT NULL,
+                position_id INT,
+                exp_id INT,
+                hire_date DATE NOT NULL,
+                FOREIGN KEY (position_id) REFERENCES positions(position_id),
+                FOREIGN KEY (exp_id) REFERENCES experience(exp_id)
             );
 
-            -- Create the Products table if it doesn't exist
-            CREATE TABLE IF NOT EXISTS Products (
-                ProductID INT AUTO_INCREMENT PRIMARY KEY,
-                Name VARCHAR(100),
-                Category VARCHAR(50),
-                Description TEXT,
-                Price DECIMAL(10, 2),
-                StockQuantity INT,
-                SupplierID INT,
-                FOREIGN KEY (SupplierID) REFERENCES Suppliers(SupplierID)
+            CREATE TABLE IF NOT EXISTS experience (
+                exp_id INT PRIMARY KEY NOT NULL,
+                exp_level VARCHAR(255) NOT NULL,
+                exp_factor DECIMAL(10, 2) NOT NULL
             );
 
-            -- Create the Orders table if it doesn't exist
-            CREATE TABLE IF NOT EXISTS Orders (
-                OrderID INT AUTO_INCREMENT PRIMARY KEY,
-                CustomerID INT,
-                OrderDate DATE,
-                TotalAmount DECIMAL(10, 2),
-                PaymentMethod VARCHAR(50),
-                PaymentDate DATE,
-                FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
+            CREATE TABLE IF NOT EXISTS positions (
+                position_id INT PRIMARY KEY NOT NULL,
+                position_name VARCHAR(255) NOT NULL,
+                base_salary DECIMAL(10, 2) NOT NULL
             );
 
-            -- Create the OrderDetails table if it doesn't exist
-            CREATE TABLE IF NOT EXISTS OrderDetails (
-                OrderDetailID INT AUTO_INCREMENT PRIMARY KEY,
-                OrderID INT,
-                ProductID INT,
-                Quantity INT,
-                Subtotal DECIMAL(10, 2),
-                FOREIGN KEY (OrderID) REFERENCES Orders(OrderID),
-                FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
-            );
-
-            -- Create the Employees table if it doesn't exist
-            CREATE TABLE IF NOT EXISTS Employees (
-                EmployeeID INT AUTO_INCREMENT PRIMARY KEY,
-                FirstName VARCHAR(50),
-                LastName VARCHAR(50),
-                Position VARCHAR(50),
-                Email VARCHAR(100),
-                Phone VARCHAR(15),
-                HireDate DATE,
-                StoreID INT,
-                FOREIGN KEY (StoreID) REFERENCES StoreLocations(StoreID)
-            );
-
-            -- Create the Sales table if it doesn't exist
-            CREATE TABLE IF NOT EXISTS Sales (
-                SaleID INT AUTO_INCREMENT PRIMARY KEY,
-                EmployeeID INT,
-                SaleDate DATE,
-                TotalSalesAmount DECIMAL(10, 2),
-                FOREIGN KEY (EmployeeID) REFERENCES Employees(EmployeeID)
-            );
-
-            -- Create the Promotions table if it doesn't exist
-            CREATE TABLE IF NOT EXISTS Promotions (
-                PromotionID INT AUTO_INCREMENT PRIMARY KEY,
-                Name VARCHAR(100),
-                Description TEXT,
-                StartDate DATE,
-                EndDate DATE,
-                DiscountPercentage DECIMAL(5, 2)
-            );
-
-            -- Create the PromotionUsage table if it doesn't exist
-            CREATE TABLE IF NOT EXISTS PromotionUsage (
-                UsageID INT AUTO_INCREMENT PRIMARY KEY,
-                PromotionID INT,
-                OrderID INT,
-                FOREIGN KEY (PromotionID) REFERENCES Promotions(PromotionID),
-                FOREIGN KEY (OrderID) REFERENCES Orders(OrderID)
-            );
-
-            -- Create the Inventory table if it doesn't exist
-            CREATE TABLE IF NOT EXISTS Inventory (
-                InventoryID INT AUTO_INCREMENT PRIMARY KEY,
-                ProductID INT,
-                StockQuantity INT,
-                RestockThreshold INT,
-                FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
-            );
-
-            -- Create the StoreLocations table if it doesn't exist
-            CREATE TABLE IF NOT EXISTS StoreLocations (
-                StoreID INT AUTO_INCREMENT PRIMARY KEY,
-                StoreName VARCHAR(100),
-                Address VARCHAR(255),
-                Phone VARCHAR(15),
-                Manager VARCHAR(100),
-                OpeningDate DATE
-            );
-
-            -- Create the Suppliers table if it doesn't exist
-            CREATE TABLE IF NOT EXISTS Suppliers (
-                SupplierID INT AUTO_INCREMENT PRIMARY KEY,
-                SupplierName VARCHAR(100),
-                ContactPerson VARCHAR(100),
-                Email VARCHAR(255),
-                Phone VARCHAR(15),
-                Address VARCHAR(255)
-            );
+            CREATE TABLE IF NOT EXISTS store_locations (
+                store_id INT PRIMARY KEY NOT NULL,
+                store_name VARCHAR(255) NOT NULL,
+                address VARCHAR(255) NOT NULL,
+                phone VARCHAR(15) NOT NULL,
+                manager VARCHAR(255),
+                opening_date DATE
+            ); 
 
             CREATE TABLE IF NOT EXISTS visits (
                 visit_id INT PRIMARY KEY,
+                date DATE NOT NULL,
                 customer_id INT,
-                FOREIGN KEY (customer_id) REFERENCES Customers(CustomerID)
+                store_id INT,
+                FOREIGN KEY (customer_id) REFERENCES customers(customer_id),
+                FOREIGN KEY (store_id) REFERENCES store_locations(store_id)
             );
 
-                '''
+            CREATE TABLE IF NOT EXISTS inventory (
+                inventory_id INT PRIMARY KEY,
+                stock_quantity INT NOT NULL,
+                restock_threshold INT NOT NULL,
+                product_id INT,
+                FOREIGN KEY (product_id) REFERENCES products(product_id)
+            );
+
+            CREATE TABLE IF NOT EXISTS customers (
+                customer_id INT PRIMARY KEY,
+                first_name VARCHAR(255) NOT NULL,
+                last_name VARCHAR(255) NOT NULL,
+                email VARCHAR(255) UNIQUE NOT NULL,
+                phone VARCHAR(15) UNIQUE NOT NULL,
+                address VARCHAR(255) NOT NULL
+            );
+
+            CREATE TABLE IF NOT EXISTS customer_details (
+                customer_id INT,
+                registration_date DATE DEFAULT CURRENT_DATE NOT NULL,
+                loyalty_points INT NOT NULL DEFAULT 0,
+                FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
+            );
+
+            CREATE TABLE IF NOT EXISTS transactions (
+                transaction_id INT PRIMARY KEY,
+                transaction_type VARCHAR(255) NOT NULL,
+                date DATETIME NOT NULL,
+                amount DECIMAL(10, 2) NOT NULL,
+                order_id INT,
+                visit_id INT,
+                FOREIGN KEY (order_id) REFERENCES orders(order_id),
+                FOREIGN KEY (visit_id) REFERENCES visits(visit_id)
+            );
+
+            CREATE TABLE IF NOT EXISTS suppliers (
+                supplier_id INT PRIMARY KEY NOT NULL,
+                supplier_name VARCHAR(255) NOT NULL,
+                email VARCHAR(255) NOT NULL,
+                phone VARCHAR(15) NOT NULL,
+                address VARCHAR(255) NOT NULL
+            );
+
+            CREATE TABLE IF NOT EXISTS sales (
+                sale_id INT PRIMARY KEY,
+                sale_date DATE NOT NULL,
+                total_sales_amount DECIMAL(10, 2) NOT NULL,
+                employee_id INT,
+                FOREIGN KEY (employee_id) REFERENCES employees(employee_id)
+            );
+
+            CREATE TABLE IF NOT EXISTS orders (
+                order_id INT PRIMARY KEY,
+                order_date DATE NOT NULL,
+                total_amount DECIMAL(10, 2) NOT NULL,
+                payment_method VARCHAR(255) NOT NULL,
+                payment_date DATE NOT NULL,
+                customer_id INT,
+                FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
+            );
+
+            CREATE TABLE IF NOT EXISTS orderdetails (
+                orderdetail_id INT PRIMARY KEY,
+                quantity INT NOT NULL,
+                subtotal DECIMAL(10, 2) NOT NULL,
+                order_id INT,
+                product_id INT,
+                FOREIGN KEY (order_id) REFERENCES orders(order_id),
+                FOREIGN KEY (product_id) REFERENCES products(product_id)
+            );
+
+            CREATE TABLE IF NOT EXISTS products (
+                product_id INT PRIMARY KEY,
+                name VARCHAR(255) NOT NULL,
+                category VARCHAR(255) NOT NULL,
+                price DECIMAL(10, 2) NOT NULL,
+                stock_quantity INT NOT NULL,
+                profit_per_unit DECIMAL(10, 2) NOT NULL,
+                supplier_id INT,
+                FOREIGN KEY (supplier_id) REFERENCES suppliers(supplier_id)
+            );
+            
+            '''
             mycursor.execute(query)
         except:
-                query = 'USE adbms'
+                query = 'USE supermarket'
                 mycursor.execute(query)
 
         # con.commit()

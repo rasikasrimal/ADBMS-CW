@@ -14,8 +14,7 @@ def open_customer_window(root, mycursor):
     customer_scroll_y = Scrollbar(customer_frame, orient=VERTICAL)
 
     customer_table = ttk.Treeview(customer_frame, columns=(
-        'CustomerID', 'FirstName', 'LastName', 'Email', 'Phone', 'Address',
-        'RegistrationDate', 'LoyaltyPoints'),
+        'CustomerID', 'FirstName', 'LastName', 'Email', 'Phone', 'Address'),
         xscrollcommand=customer_scroll_x.set,
         yscrollcommand=customer_scroll_y.set)
 
@@ -33,8 +32,6 @@ def open_customer_window(root, mycursor):
     customer_table.heading('Email', text='Email')
     customer_table.heading('Phone', text='Phone')
     customer_table.heading('Address', text='Address')
-    customer_table.heading('RegistrationDate', text='RegistrationDate')
-    customer_table.heading('LoyaltyPoints', text='LoyaltyPoints')
 
     customer_table.column('CustomerID', width=20, anchor=CENTER)
     customer_table.column('FirstName', width=60, anchor=CENTER)
@@ -42,8 +39,6 @@ def open_customer_window(root, mycursor):
     customer_table.column('Email', width=60, anchor=CENTER)
     customer_table.column('Phone', width=60, anchor=CENTER)
     customer_table.column('Address', width=60, anchor=CENTER)
-    customer_table.column('RegistrationDate', width=60, anchor=CENTER)
-    customer_table.column('LoyaltyPoints', width=60, anchor=CENTER)
 
     style = ttk.Style()
     style.configure('Treeview', rowheight=40, font=('Helvetica', 10), foreground='black', background='white', fieldbackground='white')
