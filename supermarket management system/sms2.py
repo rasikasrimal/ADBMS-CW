@@ -8,7 +8,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import mysql.connector
 
-from tkinter import ttk
 
 import exit_operations as exit_ops
 import export_operations as export_ops
@@ -196,7 +195,6 @@ def add_product():
             except ValueError:
                 messagebox.showerror('Error', 'Invalid input for supplier_id', parent=add_window)
 
-
     add_window = Toplevel()
     add_window.grab_set()
     add_window.resizable(False, False)
@@ -246,41 +244,6 @@ def add_product():
     add_button.grid(row=7, column=0, columnspan=2, pady=10)
 
     add_window.mainloop()
-#################################################################################################
-import tkinter as tk
-from tkinter import ttk
-import pymysql
-
-def update_customer():
-    # Create a new window for updating customer details
-    update_window = tk.Toplevel(root)
-    update_window.title("Update Customer Details")
-
-    # Create and place labels and entry widgets for each customer detail
-    labels = ["Customer ID", "First Name", "Last Name", "Email", "Phone", "Address"]
-    entries = []
-
-    for i, label in enumerate(labels):
-        tk.Label(update_window, text=label).grid(row=i, column=0, padx=10, pady=5)
-        entry = tk.Entry(update_window)
-        entry.grid(row=i, column=1, padx=10, pady=5)
-        entries.append(entry)
-
-    # Function to update customer details in the database
-    def save_changes():
-        # Get the updated values from entry widgets
-        updated_values = [entry.get() for entry in entries]
-
-        # Update the customer details in the database
-        update_query = "UPDATE customers SET first_name=%s, last_name=%s, email=%s, phone=%s, address=%s WHERE customer_id=%s"
-        cursor.execute(update_query, (updated_values[1], updated_values[2], updated_values[3], updated_values[4], updated_values[5], updated_values[0]))
-        db.commit()
-
-        # Close the update window after saving changes
-        update_window.destroy()
-
-    # Create a button to save changes
-    tk.Button(update_window, text="Save Changes", command=save_changes).grid(row=len(labels), column=0, columnspan=2, pady=10)
 
 #################################################################################################
 
@@ -563,389 +526,138 @@ leftFrame.place(x=10, y=70, width=1100, height=534)
 # logo_label = Label(leftFrame, image=logo_image)
 # logo_label.grid(row=0, column=0, padx=10, pady=10)
 
-addcustomerButton = ttk.Button(leftFrame, text='Add customer', width=25, state=NORMAL, command=add_customer)
+addcustomerButton = ttk.Button(leftFrame, text='Add customer', width=25, state=DISABLED, command=add_customer)
 addcustomerButton.grid(row=0, column=0, padx=10, pady=0)
 
-addproductButton = ttk.Button(leftFrame, text='Add product', width=25, state=NORMAL, command=add_product)
+addproductButton = ttk.Button(leftFrame, text='Add product', width=25, state=DISABLED, command=lambda: toplevel_date('Add Products', 'Add Products', add_products))
 addproductButton.grid(row=1, column=0, padx=10, pady=0)
 
-addorderButton = ttk.Button(leftFrame, text='Add order', width=25, state=NORMAL, command=lambda: toplevel_date('Add Student', 'Add Student', add_data))
+addorderButton = ttk.Button(leftFrame, text='Add order', width=25, state=DISABLED, command=lambda: toplevel_date('Add Student', 'Add Student', add_data))
 addorderButton.grid(row=2, column=0, padx=10, pady=0)
 
-addemployeeButton = ttk.Button(leftFrame, text='Add employee', width=25, state=NORMAL, command=lambda: toplevel_date('Add Student', 'Add Student', add_data))
+addemployeeButton = ttk.Button(leftFrame, text='Add employee', width=25, state=DISABLED, command=lambda: toplevel_date('Add Student', 'Add Student', add_data))
 addemployeeButton.grid(row=3, column=0, padx=10, pady=0)
 
-addorderdetailButton = ttk.Button(leftFrame, text='Add orderdetail', width=25, state=NORMAL, command=lambda: toplevel_date('Add Student', 'Add Student', add_data))
+addorderdetailButton = ttk.Button(leftFrame, text='Add orderdetail', width=25, state=DISABLED, command=lambda: toplevel_date('Add Student', 'Add Student', add_data))
 addorderdetailButton.grid(row=4, column=0, padx=10, pady=0)
 
-addsalesButton = ttk.Button(leftFrame, text='Add Sales', width=25, state=NORMAL, command=lambda: toplevel_date('Add Student', 'Add Student', add_data))
+addsalesButton = ttk.Button(leftFrame, text='Add Sales', width=25, state=DISABLED, command=lambda: toplevel_date('Add Student', 'Add Student', add_data))
 addsalesButton.grid(row=5, column=0, padx=10, pady=0)
 
-addpromotionButton = ttk.Button(leftFrame, text='Add promotion', width=25, state=NORMAL, command=lambda: toplevel_date('Add Student', 'Add Student', add_data))
+addpromotionButton = ttk.Button(leftFrame, text='Add promotion', width=25, state=DISABLED, command=lambda: toplevel_date('Add Student', 'Add Student', add_data))
 addpromotionButton.grid(row=6, column=0, padx=10, pady=0)
 
-addpromotionusageButton = ttk.Button(leftFrame, text='Add promotionusage', width=25, state=NORMAL, command=lambda: toplevel_date('Add Student', 'Add Student', add_data))
+addpromotionusageButton = ttk.Button(leftFrame, text='Add promotionusage', width=25, state=DISABLED, command=lambda: toplevel_date('Add Student', 'Add Student', add_data))
 addpromotionusageButton.grid(row=7, column=0, padx=10, pady=0)
 
-addinventoryButton = ttk.Button(leftFrame, text='Add inventory', width=25, state=NORMAL, command=lambda: toplevel_date('Add Student', 'Add Student', add_data))
+addinventoryButton = ttk.Button(leftFrame, text='Add inventory', width=25, state=DISABLED, command=lambda: toplevel_date('Add Student', 'Add Student', add_data))
 addinventoryButton.grid(row=8, column=0, padx=10, pady=0)
 
-addsupplierButton = ttk.Button(leftFrame, text='Add Supplier', width=25, state=NORMAL, command=lambda: toplevel_date('Add Student', 'Add Student', add_data))
+addsupplierButton = ttk.Button(leftFrame, text='Add Supplier', width=25, state=DISABLED, command=lambda: toplevel_date('Add Student', 'Add Student', add_data))
 addsupplierButton.grid(row=9, column=0, padx=10, pady=0)
 
-addtransactionButton = ttk.Button(leftFrame, text='Add transaction', width=25, state=NORMAL, command=lambda: toplevel_date('Add Student', 'Add Student', add_data))
+addtransactionButton = ttk.Button(leftFrame, text='Add transaction', width=25, state=DISABLED, command=lambda: toplevel_date('Add Student', 'Add Student', add_data))
 addtransactionButton.grid(row=10, column=0, padx=10, pady=0)
 
-addstorelocationButton = ttk.Button(leftFrame, text='Add Storelocation', width=25, state=NORMAL, command=lambda: toplevel_date('Add Student', 'Add Student', add_data))
+addstorelocationButton = ttk.Button(leftFrame, text='Add Storelocation', width=25, state=DISABLED, command=lambda: toplevel_date('Add Student', 'Add Student', add_data))
 addstorelocationButton.grid(row=11, column=0, padx=10, pady=0)
 
-addvisitButton = ttk.Button(leftFrame, text='Add visit', width=25, state=NORMAL, command=lambda: toplevel_date('Add Student', 'Add Student', add_data))
+addvisitButton = ttk.Button(leftFrame, text='Add visit', width=25, state=DISABLED, command=lambda: toplevel_date('Add Student', 'Add Student', add_data))
 addvisitButton.grid(row=12, column=0, padx=10, pady=0)
 
-show_customer_button = ttk.Button(leftFrame, text='Customers', width=25, state=NORMAL, command=lambda: customer.open_customer_window(root, mycursor))
+show_customer_button = ttk.Button(leftFrame, text='Customers', width=25, state=DISABLED, command=lambda: customer.open_customer_window(root, mycursor))
 show_customer_button.grid(row=0, column=1, padx=10, pady=0)
 
-show_product_button = ttk.Button(leftFrame, text='Products', width=25, state=NORMAL, command=lambda: product.open_product_window(root, mycursor))
+show_product_button = ttk.Button(leftFrame, text='Products', width=25, state=DISABLED, command=lambda: product.open_product_window(root, mycursor))
 show_product_button.grid(row=1, column=1, padx=10, pady=0)
 
-show_order_button = ttk.Button(leftFrame, text='Order', width=25, state=NORMAL, command=lambda: order.open_order_window(root, mycursor))
+show_order_button = ttk.Button(leftFrame, text='Order', width=25, state=DISABLED, command=lambda: order.open_order_window(root, mycursor))
 show_order_button.grid(row=2, column=1, padx=10, pady=0)
 
-show_employee_button = ttk.Button(leftFrame, text='Employee', width=25, state=NORMAL, command=lambda: employee.open_employee_window(root, mycursor))
+show_employee_button = ttk.Button(leftFrame, text='Employee', width=25, state=DISABLED, command=lambda: employee.open_employee_window(root, mycursor))
 show_employee_button.grid(row=3, column=1, padx=10, pady=0)
 
-show_orderdetail_button = ttk.Button(leftFrame, text='Order Detail', width=25, state=NORMAL, command=lambda: orderdetail.open_orderdetail_window(root, mycursor))
+show_orderdetail_button = ttk.Button(leftFrame, text='Order Detail', width=25, state=DISABLED, command=lambda: orderdetail.open_orderdetail_window(root, mycursor))
 show_orderdetail_button.grid(row=4, column=1, padx=10, pady=0)
 
-show_sale_button = ttk.Button(leftFrame, text='Sales', width=25, state=NORMAL, command=lambda: sale.open_sale_window(root, mycursor))
+show_sale_button = ttk.Button(leftFrame, text='Sales', width=25, state=DISABLED, command=lambda: sale.open_sale_window(root, mycursor))
 show_sale_button.grid(row=5, column=1, padx=10, pady=0)
 
-show_promotion_button = ttk.Button(leftFrame, text='Promotion', width=25, state=NORMAL, command=lambda: promotion.open_promotion_window(root, mycursor))
+show_promotion_button = ttk.Button(leftFrame, text='Promotion', width=25, state=DISABLED, command=lambda: promotion.open_promotion_window(root, mycursor))
 show_promotion_button.grid(row=6, column=1, padx=10, pady=0)
 
-show_promotionusage_button = ttk.Button(leftFrame, text='Promotion Usage', width=25, state=NORMAL, command=lambda: promotionusage.open_promotionusage_window(root, mycursor))
+show_promotionusage_button = ttk.Button(leftFrame, text='Promotion Usage', width=25, state=DISABLED, command=lambda: promotionusage.open_promotionusage_window(root, mycursor))
 show_promotionusage_button.grid(row=7, column=1, padx=10, pady=0)
 
-show_inventory_button = ttk.Button(leftFrame, text='Inventory', width=25, state=NORMAL, command=lambda: inventory.open_inventory_window(root, mycursor))
+show_inventory_button = ttk.Button(leftFrame, text='Inventory', width=25, state=DISABLED, command=lambda: inventory.open_inventory_window(root, mycursor))
 show_inventory_button.grid(row=8, column=1, padx=10, pady=0)
 
-show_supplier_button = ttk.Button(leftFrame, text='Supplier', width=25, state=NORMAL, command=lambda: supplier.open_supplier_window(root, mycursor))
+show_supplier_button = ttk.Button(leftFrame, text='Supplier', width=25, state=DISABLED, command=lambda: supplier.open_supplier_window(root, mycursor))
 show_supplier_button.grid(row=9, column=1, padx=10, pady=0)
 
-show_transaction_button = ttk.Button(leftFrame, text='Transaction', width=25, state=NORMAL, command=lambda: transaction.open_transaction_window(root, mycursor))
+show_transaction_button = ttk.Button(leftFrame, text='Transaction', width=25, state=DISABLED, command=lambda: transaction.open_transaction_window(root, mycursor))
 show_transaction_button.grid(row=10, column=1, padx=10, pady=0)
 
-show_storelocation_button = ttk.Button(leftFrame, text='Storelocation', width=25, state=NORMAL, command=lambda: storelocation.open_storelocation_window(root, mycursor))
+show_storelocation_button = ttk.Button(leftFrame, text='Storelocation', width=25, state=DISABLED, command=lambda: storelocation.open_storelocation_window(root, mycursor))
 show_storelocation_button.grid(row=11, column=1, padx=10, pady=0)
 
-show_visit_button = ttk.Button(leftFrame, text='Visits', width=25, state=NORMAL, command=lambda: visits.open_visit_window(root, mycursor))
+show_visit_button = ttk.Button(leftFrame, text='Visits', width=25, state=DISABLED, command=lambda: visits.open_visit_window(root, mycursor))
 show_visit_button.grid(row=12, column=1, padx=10, pady=0)
 
 #################################################################################################
 
-updatecustomerButton = ttk.Button(leftFrame, text='Update Customer', width=25, state=NORMAL, command=update_customer)
-updatecustomerButton.grid(row=0, column=2, padx=10, pady=0)
+updatestudentButton = ttk.Button(leftFrame, text='Update Student', width=25, state=DISABLED, command=lambda: toplevel_date('Update Student', 'Update Student', update_data))
+updatestudentButton.grid(row=0, column=2, padx=10, pady=0)
 
-updateproductButton = ttk.Button(leftFrame, text='Update Product', width=25, state=NORMAL, command=lambda: toplevel_date('Update Student', 'Update Student', update_data))
-updateproductButton.grid(row=1, column=2, padx=10, pady=0)
+updatestudentButton = ttk.Button(leftFrame, text='Update Student', width=25, state=DISABLED, command=lambda: toplevel_date('Update Student', 'Update Student', update_data))
+updatestudentButton.grid(row=1, column=2, padx=10, pady=0)
 
-updateorderButton = ttk.Button(leftFrame, text='Update Order', width=25, state=NORMAL, command=lambda: toplevel_date('Update Student', 'Update Student', update_data))
-updateorderButton.grid(row=2, column=2, padx=10, pady=0)
+updatestudentButton = ttk.Button(leftFrame, text='Update Student', width=25, state=DISABLED, command=lambda: toplevel_date('Update Student', 'Update Student', update_data))
+updatestudentButton.grid(row=2, column=2, padx=10, pady=0)
 
-updateemployeeButton = ttk.Button(leftFrame, text='Update Employee', width=25, state=NORMAL, command=lambda: toplevel_date('Update Student', 'Update Student', update_data))
-updateemployeeButton.grid(row=3, column=2, padx=10, pady=0)
+updatestudentButton = ttk.Button(leftFrame, text='Update Student', width=25, state=DISABLED, command=lambda: toplevel_date('Update Student', 'Update Student', update_data))
+updatestudentButton.grid(row=3, column=2, padx=10, pady=0)
 
-updatestudentButton = ttk.Button(leftFrame, text='Update Order Detail', width=25, state=NORMAL, command=lambda: toplevel_date('Update Student', 'Update Student', update_data))
+updatestudentButton = ttk.Button(leftFrame, text='Update Student', width=25, state=DISABLED, command=lambda: toplevel_date('Update Student', 'Update Student', update_data))
 updatestudentButton.grid(row=4, column=2, padx=10, pady=0)
 
-updatesaleButton = ttk.Button(leftFrame, text='Update Sales', width=25, state=NORMAL, command=lambda: toplevel_date('Update Student', 'Update Student', update_data))
-updatesaleButton.grid(row=5, column=2, padx=10, pady=0)
+updatestudentButton = ttk.Button(leftFrame, text='Update Student', width=25, state=DISABLED, command=lambda: toplevel_date('Update Student', 'Update Student', update_data))
+updatestudentButton.grid(row=5, column=2, padx=10, pady=0)
 
-updatepromotionButton = ttk.Button(leftFrame, text='Update Promotion', width=25, state=NORMAL, command=lambda: toplevel_date('Update Student', 'Update Student', update_data))
-updatepromotionButton.grid(row=6, column=2, padx=10, pady=0)
+updatestudentButton = ttk.Button(leftFrame, text='Update Student', width=25, state=DISABLED, command=lambda: toplevel_date('Update Student', 'Update Student', update_data))
+updatestudentButton.grid(row=6, column=2, padx=10, pady=0)
 
-updatepromotionuButton = ttk.Button(leftFrame, text='Update Promotion Usage', width=25, state=NORMAL, command=lambda: toplevel_date('Update Student', 'Update Student', update_data))
-updatepromotionuButton.grid(row=7, column=2, padx=10, pady=0)
+updatestudentButton = ttk.Button(leftFrame, text='Update Student', width=25, state=DISABLED, command=lambda: toplevel_date('Update Student', 'Update Student', update_data))
+updatestudentButton.grid(row=7, column=2, padx=10, pady=0)
 
-updateinventoryButton = ttk.Button(leftFrame, text='Update Inventory', width=25, state=NORMAL, command=lambda: toplevel_date('Update Student', 'Update Student', update_data))
-updateinventoryButton.grid(row=8, column=2, padx=10, pady=0)
+updatestudentButton = ttk.Button(leftFrame, text='Update Student', width=25, state=DISABLED, command=lambda: toplevel_date('Update Student', 'Update Student', update_data))
+updatestudentButton.grid(row=8, column=2, padx=10, pady=0)
 
-updatesupplierButton = ttk.Button(leftFrame, text='Update Supplier', width=25, state=NORMAL, command=lambda: toplevel_date('Update Student', 'Update Student', update_data))
-updatesupplierButton.grid(row=9, column=2, padx=10, pady=0)
+updatestudentButton = ttk.Button(leftFrame, text='Update Student', width=25, state=DISABLED, command=lambda: toplevel_date('Update Student', 'Update Student', update_data))
+updatestudentButton.grid(row=9, column=2, padx=10, pady=0)
 
-updatetransactionButton = ttk.Button(leftFrame, text='Update Transaction', width=25, state=NORMAL, command=lambda: toplevel_date('Update Student', 'Update Student', update_data))
-updatetransactionButton.grid(row=10, column=2, padx=10, pady=0)
+updatestudentButton = ttk.Button(leftFrame, text='Update Student', width=25, state=DISABLED, command=lambda: toplevel_date('Update Student', 'Update Student', update_data))
+updatestudentButton.grid(row=10, column=2, padx=10, pady=0)
 
-updatestorelocationButton = ttk.Button(leftFrame, text='Update Store Location', width=25, state=NORMAL, command=lambda: toplevel_date('Update Student', 'Update Student', update_data))
-updatestorelocationButton.grid(row=11, column=2, padx=10, pady=0)
+updatestudentButton = ttk.Button(leftFrame, text='Update Student', width=25, state=DISABLED, command=lambda: toplevel_date('Update Student', 'Update Student', update_data))
+updatestudentButton.grid(row=11, column=2, padx=10, pady=0)
 
-updatevisitButton = ttk.Button(leftFrame, text='Update visits', width=25, state=NORMAL, command=lambda: toplevel_date('Update Student', 'Update Student', update_data))
-updatevisitButton.grid(row=12, column=2, padx=10, pady=0)
+updatestudentButton = ttk.Button(leftFrame, text='Update Student', width=25, state=DISABLED, command=lambda: toplevel_date('Update Student', 'Update Student', update_data))
+updatestudentButton.grid(row=12, column=2, padx=10, pady=0)
 
 
 
 #################################################################################################
 
-# Import necessary libraries
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
+show_customers__button = ttk.Button(leftFrame, text='customers_visits_trans', width=25, state=DISABLED, command=lambda: customers_.open_customers__window(root, mycursor))
+show_customers__button.grid(row=0, column=3, padx=10, pady=0)
 
-def sales_analysis():
-    # Query for Sales Analysis
-    query = """
-    SELECT e.employee_id, SUM(s.total_sales_amount) AS TotalSales
-    FROM Sales s
-    INNER JOIN Employee e ON s.employee_id = e.employee_id
-    WHERE e.position_id = (SELECT position_id FROM Positions WHERE position_name = 'manager')
-    GROUP BY e.employee_id
-    ORDER BY TotalSales DESC;
-    """
-    # Execute the query
-    mycursor.execute(query)
-    # Fetch the results
-    results = mycursor.fetchall()
-
-    # Convert results to a DataFrame for visualization
-    df = pd.DataFrame(results, columns=['EmployeeID', 'TotalSales'])
-
-    # Visualization (example: bar plot)
-    plt.figure(figsize=(10, 6))
-    sns.barplot(x='EmployeeID', y='TotalSales', data=df, palette='viridis')
-    plt.title('Sales Analysis for Store Managers')
-    plt.xlabel('Employee ID')
-    plt.ylabel('Total Sales Amount')
-    plt.show()
-
-# Call this function when the corresponding button is clicked
-salesanalysis_button = ttk.Button(leftFrame, text='Sales Analysis', width=25, state=NORMAL, command=sales_analysis)
-salesanalysis_button.grid(row=0, column=3, padx=10, pady=0)
-#################################################################################################
-def customer_analysis():
-    # Query for Customer Analysis
-    query = """
-    SELECT c.customer_id, SUM(od.subtotal) AS TotalPurchaseAmount
-    FROM customers c
-    JOIN orders o ON c.customer_id = o.customer_id
-    JOIN orderdetails od ON o.order_id = od.order_id
-    GROUP BY c.customer_id
-    ORDER BY TotalPurchaseAmount DESC
-    LIMIT 50;
-    """
-    # Execute the query
-    mycursor.execute(query)
-    # Fetch the results
-    results = mycursor.fetchall()
-
-    # Convert results to a DataFrame for visualization
-    df = pd.DataFrame(results, columns=['CustomerID', 'TotalPurchaseAmount'])
-
-    # Visualization (example: bar plot)
-    plt.figure(figsize=(12, 8))
-    sns.barplot(x='CustomerID', y='TotalPurchaseAmount', data=df, palette='magma')
-    plt.title('Top 50 Customers by Total Purchase Amount')
-    plt.xlabel('Customer ID')
-    plt.ylabel('Total Purchase Amount')
-    plt.show()
-
-# Call this function when the corresponding button is clicked
-customeranalysis_button = ttk.Button(leftFrame, text='Customer Analysis', width=25, state=NORMAL, command=customer_analysis)
-customeranalysis_button.grid(row=1, column=3, padx=10, pady=0)
 #################################################################################################
 
-def inventory_management():
-    # Query for Inventory Management
-    query = """
-    SELECT p.product_id, p.name AS ProductName, i.stock_quantity, i.restock_threshold
-    FROM Products p
-    JOIN Inventory i ON p.product_id = i.product_id
-    WHERE i.stock_quantity < i.restock_threshold;
-    """
-    # Execute the query
-    mycursor.execute(query)
-    # Fetch the results
-    results = mycursor.fetchall()
 
-    # Convert results to a DataFrame for visualization
-    df = pd.DataFrame(results, columns=['ProductID', 'ProductName', 'StockQuantity', 'RestockThreshold'])
 
-    # Visualization (example: table display)
-    print(df)
 
-# Call this function when the corresponding button is clicked
-inventorymanagement_button = ttk.Button(leftFrame, text='Inventory Management', width=25, state=NORMAL, command=inventory_management)
-inventorymanagement_button.grid(row=2, column=3, padx=10, pady=0)
-#################################################################################################
 
-def employee_performance():
-    # Query for Employee Performance
-    query = """
-    SELECT e.employee_id, e.first_name, e.last_name, 
-           SUM(s.total_sales_amount) AS TotalSales, 
-           COUNT(s.sale_id) AS TotalTransactions, 
-           SUM(s.total_sales_amount) / COUNT(s.sale_id) AS AvgSalesPerTransaction
-    FROM Sales s
-    INNER JOIN Employee e ON s.employee_id = e.employee_id
-    GROUP BY e.employee_id, e.first_name, e.last_name;
-    """
-    # Execute the query
-    mycursor.execute(query)
-    # Fetch the results
-    results = mycursor.fetchall()
-
-    # Convert results to a DataFrame for visualization
-    df = pd.DataFrame(results, columns=['EmployeeID', 'FirstName', 'LastName', 'TotalSales', 'TotalTransactions', 'AvgSalesPerTransaction'])
-
-    # Visualization (example: table display)
-    print(df)
-
-# Call this function when the corresponding button is clicked
-employeeperformance_button = ttk.Button(leftFrame, text='Employee Performance', width=25, state=NORMAL, command=employee_performance)
-employeeperformance_button.grid(row=3, column=3, padx=10, pady=0)
-#################################################################################################
-
-def store_analysis():
-    # Query for Store Analysis
-    query = """
-    SELECT
-        sl.store_id,
-        sl.store_name,
-        COUNT(v.visit_id) AS TotalVisits,
-        COUNT(DISTINCT v.customer_id) AS UniqueVisitors,
-        COUNT(DISTINCT t.transaction_id) AS TotalTransactions,
-        SUM(t.amount) AS TotalSales
-    FROM
-        store_locations sl
-    LEFT JOIN
-        visits v ON sl.store_id = v.store_id
-    LEFT JOIN
-        transactions t ON v.visit_id = t.visit_id
-    GROUP BY
-        sl.store_id, sl.store_name
-    ORDER BY
-        sl.store_id;
-    """
-    # Execute the query
-    mycursor.execute(query)
-    # Fetch the results
-    results = mycursor.fetchall()
-
-    # Convert results to a DataFrame for visualization
-    df = pd.DataFrame(results, columns=['StoreID', 'StoreName', 'TotalVisits', 'UniqueVisitors', 'TotalTransactions', 'TotalSales'])
-
-    # Visualization (example: table display)
-    print(df)
-
-# Call this function when the corresponding button is clicked
-storeanalysis_button = ttk.Button(leftFrame, text='Store Analysis', width=25, state=NORMAL, command=store_analysis)
-storeanalysis_button.grid(row=4, column=3, padx=10, pady=0)
-#################################################################################################
-
-def financial_analysis():
-    # Query for Financial Analysis
-    query = """
-    SELECT
-        DATE_FORMAT(s.sale_date, '%Y-%m') AS Month,
-        SUM(s.total_sales_amount) AS TotalSales,
-        COUNT(t.transaction_id) AS TotalTransactions,
-        SUM(t.amount) AS TotalTransactionAmount
-    FROM
-        Sales s
-    LEFT JOIN
-        Transactions t ON s.sale_date = t.date
-    GROUP BY
-        Month
-    ORDER BY
-        Month;
-    """
-    # Execute the query
-    mycursor.execute(query)
-    # Fetch the results
-    results = mycursor.fetchall()
-
-    # Convert results to a DataFrame for visualization
-    df = pd.DataFrame(results, columns=['Month', 'TotalSales', 'TotalTransactions', 'TotalTransactionAmount'])
-
-    # Visualization (example: table display)
-    print(df)
-
-# Call this function when the corresponding button is clicked
-financialanalysis_button = ttk.Button(leftFrame, text='Financial Analysis', width=25, state=NORMAL, command=financial_analysis)
-financialanalysis_button.grid(row=5, column=3, padx=10, pady=0)
-#################################################################################################
-
-def visitation_analysis():
-    # Query for Visitation Analysis
-    query = """
-    SELECT
-        v.date AS VisitDate,
-        COUNT(v.visit_id) AS TotalVisits,
-        COUNT(t.transaction_id) AS TotalTransactions
-    FROM
-        Visits v
-    LEFT JOIN
-        Transactions t ON v.visit_id = t.visit_id
-    GROUP BY
-        VisitDate
-    ORDER BY
-        VisitDate;
-    """
-    # Execute the query
-    mycursor.execute(query)
-    # Fetch the results
-    results = mycursor.fetchall()
-
-    # Convert results to a DataFrame for visualization
-    df = pd.DataFrame(results, columns=['VisitDate', 'TotalVisits', 'TotalTransactions'])
-
-    # Visualization (example: table display)
-    print(df)
-
-# Call this function when the corresponding button is clicked
-visitationanalysis_button = ttk.Button(leftFrame, text='Visitation Analysis', width=25, state=NORMAL, command=visitation_analysis)
-visitationanalysis_button.grid(row=6, column=3, padx=10, pady=0)
-#################################################################################################
-
-def transaction_analysis():
-    # Query for Transaction Analysis
-    query = """
-    SELECT
-        t.transaction_id,
-        t.transaction_type,
-        t.date AS transaction_date,
-        o.order_id,
-        o.customer_id,
-        o.order_date,
-        o.total_amount AS order_total_amount,
-        o.payment_method,
-        o.payment_date AS payment_date,
-        p.product_id,
-        p.name AS product_name,
-        p.category AS product_category,
-        p.price AS product_price
-    FROM transactions t
-    INNER JOIN orders o ON t.order_id = o.order_id
-    INNER JOIN order_details od ON o.order_id = od.order_id
-    INNER JOIN products p ON od.product_id = p.product_id;
-    """
-    # Execute the query
-    mycursor.execute(query)
-    # Fetch the results
-    results = mycursor.fetchall()
-
-    # Convert results to a DataFrame for visualization
-    df = pd.DataFrame(results, columns=['TransactionID', 'TransactionType', 'TransactionDate',
-                                         'OrderID', 'CustomerID', 'OrderDate', 'OrderTotalAmount',
-                                         'PaymentMethod', 'PaymentDate', 'ProductID', 'ProductName',
-                                         'ProductCategory', 'ProductPrice'])
-
-    # Visualization (example: table display)
-    print(df)
-
-# Call this function when the corresponding button is clicked
-transactionanalysis_button = ttk.Button(leftFrame, text='Transaction Analysis', width=25, state=NORMAL, command=transaction_analysis)
-transactionanalysis_button.grid(row=7, column=3, padx=10, pady=0)
-#####################################################
 #####################################################
 rightframe = Frame(root, bg='white', relief=RIDGE)
 rightframe.place(x=320, y=70, width=0, height=550)
@@ -954,8 +666,12 @@ rightframe.place(x=320, y=70, width=0, height=550)
 ScrollbarX = Scrollbar(rightframe, orient=HORIZONTAL)
 ScrollbarY = Scrollbar(rightframe, orient=VERTICAL)
 
+
+
 style = ttk.Style()
 style.configure('Treeview', rowheight=40, font=('Helvetica', 10), foreground='black', background='white', fieldbackground='white')
 style.configure('Treeview.Heading', font=('Helvetica', 12, 'bold'), foreground='black', background='light green', fieldbackground='grey')
+# student_table.config(show='headings')
+
 
 root.mainloop()
